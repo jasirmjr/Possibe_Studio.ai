@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg-primary: #050505;
+    --color-bg-secondary: #09090b;
+  }
+
+  body {
+    background-color: #050505;
+    color: #f4f4f5;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-heading, .font-display {
+    font-family: 'Inter Tight', 'Geist', 'Plus Jakarta Sans', 'Neue Haas Grotesk', 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.045em;
+  }
+
+  /* Custom smooth scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #09090b;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3f3f46;
+  }
+}
+
+@layer utilities {
+  .text-glow-purple {
+    text-shadow: 0 0 20px rgba(168, 85, 247, 0.6), 0 0 40px rgba(168, 85, 247, 0.2);
+  }
+  .text-glow-cyan {
+    text-shadow: 0 0 20px rgba(6, 182, 212, 0.6), 0 0 40px rgba(6, 182, 212, 0.2);
+  }
+  .box-glow-purple {
+    box-shadow: 0 0 30px -5px rgba(168, 85, 247, 0.35);
+  }
+  .box-glow-cyan {
+    box-shadow: 0 0 30px -5px rgba(6, 182, 212, 0.35);
+  }
+  .box-glow-emerald {
+    box-shadow: 0 0 30px -5px rgba(16, 185, 129, 0.35);
+  }
+  .bg-glass {
+    background: rgba(18, 18, 22, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .border-glass {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+}
