@@ -4,6 +4,7 @@ import Footer from './components/layout/Footer';
 import HeroSection from './components/hero/HeroSection';
 import WorkflowSteps from './components/sections/WorkflowSteps';
 import Neural3DSection from './components/sections/Neural3DSection';
+import WorkflowDetailedSteps from './components/sections/WorkflowDetailedSteps';
 import StageDeepDiveSection from './components/sections/StageDeepDiveSection';
 import ContactSection from './components/sections/ContactSection';
 
@@ -28,10 +29,13 @@ export default function App() {
         {/* 3. Interactive 3D Spline Neural Core with Minimal Text */}
         <Neural3DSection />
 
-        {/* 4. Deep-Dive Stage-by-Stage Scroll Pinned Narrative (Alternating Agent View, No Sub-cards) */}
+        {/* 4. Deep-Dive Elaborated Workflow Stages: Pinned Horizontal Scroll */}
+        <WorkflowDetailedSteps />
+
+        {/* 5. Stage-by-Stage Scroll Pinned Narrative (Alternating Agent View) */}
         <StageDeepDiveSection />
 
-        {/* 5. High-Impact Contact & Pipeline Deployment */}
+        {/* 6. High-Impact Contact & Pipeline Deployment */}
         <ContactSection />
       </main>
 
