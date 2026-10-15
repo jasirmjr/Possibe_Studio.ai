@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import {
   Sparkles,
   ArrowRight,
@@ -203,7 +203,19 @@ const STAGES = [
 export default function StageDeepDiveSection() {
   const containerRef = useRef(null);
   const [activeStage, setActiveStage] = useState(0);
-  const isTransitioningRef = useRef(false);
+
+  // Robust, native scroll tracking across all 7 stages:
+  // 450vh total height (approx 65vh scroll per stage) ensures smooth, natural stepping on desktop & mobile
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end']
+  });
+
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    // Distribute 7 stages evenly across 0..1
+    const stageIndex = Math.min(STAGES.length - 1, Math.max(0, Math.floor(latest * STAGES.length)));
+    setActiveStage(stageIndex);
+  });
 
   // Parity rule:
   // First level (index 0, Level 1): image on LEFT
@@ -212,248 +224,204 @@ export default function StageDeepDiveSection() {
   const isImageOnLeft = activeStage % 2 === 0;
   const currentStage = STAGES[activeStage] || STAGES[0];
 
-  // Each scroll wheel action changes levels cleanly without lag
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    let touchStartY = 0;
-
-    const onWheel = (e) => {
-      const rect = el.getBoundingClientRect();
-      // Section is considered focused when it occupies the screen
-      const inView = rect.top <= 120 && rect.bottom >= 200;
-      if (!inView) return;
-
-      if (Math.abs(e.deltaY) < 18) return;
-
-      if (e.deltaY > 0) {
-        // Scrolling down: advance level if not at the last level
-        if (activeStage < STAGES.length - 1) {
-          e.preventDefault();
-          if (isTransitioningRef.current) return;
-          isTransitioningRef.current = true;
-          setActiveStage((prev) => Math.min(STAGES.length - 1, prev + 1));
-          setTimeout(() => {
-            isTransitioningRef.current = false;
-          }, 480);
-        }
-        // At last level (Level 07), natural scroll continues down to ContactSection
-      } else {
-        // Scrolling up: go back to previous level if not at the first level
-        if (activeStage > 0) {
-          e.preventDefault();
-          if (isTransitioningRef.current) return;
-          isTransitioningRef.current = true;
-          setActiveStage((prev) => Math.max(0, prev - 1));
-          setTimeout(() => {
-            isTransitioningRef.current = false;
-          }, 480);
-        }
-        // At first level (Level 01), natural scroll continues up to previous section
-      }
-    };
-
-    const onTouchStart = (e) => {
-      touchStartY = e.touches[0].clientY;
-    };
-
-    const onTouchEnd = (e) => {
-      const rect = el.getBoundingClientRect();
-      const inView = rect.top <= 80 && rect.bottom >= window.innerHeight - 80;
-      if (!inView) return;
-
-      const touchEndY = e.changedTouches[0].clientY;
-      const diff = touchStartY - touchEndY;
-      if (Math.abs(diff) < 35) return;
-
-      if (diff > 0 && activeStage < STAGES.length - 1) {
-        if (isTransitioningRef.current) return;
-        isTransitioningRef.current = true;
-        setActiveStage((prev) => Math.min(STAGES.length - 1, prev + 1));
-        setTimeout(() => {
-          isTransitioningRef.current = false;
-        }, 480);
-      } else if (diff < 0 && activeStage > 0) {
-        if (isTransitioningRef.current) return;
-        isTransitioningRef.current = true;
-        setActiveStage((prev) => Math.max(0, prev - 1));
-        setTimeout(() => {
-          isTransitioningRef.current = false;
-        }, 480);
-      }
-    };
-
-    el.addEventListener('wheel', onWheel, { passive: false });
-    el.addEventListener('touchstart', onTouchStart, { passive: true });
-    el.addEventListener('touchend', onTouchEnd, { passive: true });
-
-    return () => {
-      el.removeEventListener('wheel', onWheel);
-      el.removeEventListener('touchstart', onTouchStart);
-      el.removeEventListener('touchend', onTouchEnd);
-    };
-  }, [activeStage]);
+  const handleStageClick = (idx) => {
+    if (!containerRef.current) return;
+    const totalHeight = containerRef.current.scrollHeight - window.innerHeight;
+    const containerTop = containerRef.current.offsetTop;
+    const targetScroll = containerTop + (idx / (STAGES.length - 1)) * totalHeight;
+    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+  };
 
   return (
     <section
       ref={containerRef}
       id="stages-deep-dive"
-      className="relative min-h-screen h-screen w-full bg-[#050505] text-zinc-100 flex flex-col justify-end overflow-hidden select-none"
+      className="relative bg-[#050505] text-zinc-100"
+      style={{ height: '480vh' }}
     >
-      {/* Background ambient lighting (hardware-accelerated radial glows) */}
-      <div className="absolute top-1/4 left-1/4 -translate-y-1/2 w-[650px] h-[450px] bg-purple-600/10 blur-[140px] pointer-events-none rounded-full will-change-transform" />
-      <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[450px] bg-cyan-600/10 blur-[140px] pointer-events-none rounded-full will-change-transform" />
-      <div className="absolute inset-0 bg-grid-pattern [background-size:32px_32px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_50%,#000_70%,transparent_100%)] opacity-15 pointer-events-none" />
-
       {/* ============================================================== */}
-      {/* MAIN STAGE SHOWCASE: Zero-lag GPU Glide + Side-Screen Heading  */}
+      {/* PINNED VIEWPORT: Stays sticky while user scrolls through 7 levels*/}
       {/* ============================================================== */}
-      <div className="relative z-10 max-w-[1680px] mx-auto w-full h-full flex items-end pb-0 px-4 sm:px-6 lg:px-12">
-        <div className="w-full h-full relative flex items-end pb-0">
-          
-          {/* ========================================================== */}
-          {/* 1. AGENT IMAGE: GPU COMPOSITOR GLIDE (ZERO LAYOUT LAG)     */}
-          {/* Animates purely via transform translateX (0% -> 100%)       */}
-          {/* ========================================================== */}
-          <motion.div
-            animate={{
-              x: isImageOnLeft ? '0%' : '100%',
-            }}
-            transition={{
-              duration: 0.65,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            className="absolute bottom-0 left-0 w-full lg:w-1/2 h-full flex items-end justify-center pointer-events-none pb-0 mb-0 z-10 will-change-transform"
-          >
-            {/* Concentric Neon Halo */}
-            <div className="absolute w-[450px] h-[450px] sm:w-[600px] sm:h-[600px] rounded-full bg-gradient-to-tr from-purple-600/25 via-indigo-600/15 to-cyan-500/20 blur-[100px] pointer-events-none -bottom-10" />
+      <div className="sticky top-0 h-screen w-full flex flex-col justify-end pt-0 pb-0 px-4 sm:px-6 lg:px-12 overflow-hidden bg-[#050505] select-none">
+        
+        {/* Background ambient lighting */}
+        <div className="absolute top-1/4 left-1/4 -translate-y-1/2 w-[650px] h-[450px] bg-purple-600/10 blur-[140px] pointer-events-none rounded-full will-change-transform" />
+        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[450px] bg-cyan-600/10 blur-[140px] pointer-events-none rounded-full will-change-transform" />
+        <div className="absolute inset-0 bg-grid-pattern [background-size:32px_32px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_50%,#000_70%,transparent_100%)] opacity-15 pointer-events-none" />
 
-            {/* Agent Figure with horizontal flip & locked bottom anchor */}
+        {/* ============================================================== */}
+        {/* MAIN STAGE SHOWCASE: Zero-lag GPU Glide + Side-Screen Heading  */}
+        {/* ============================================================== */}
+        <div className="relative z-10 max-w-[1680px] mx-auto w-full h-full flex items-end pb-0">
+          <div className="w-full h-full relative flex items-end pb-0">
+            
+            {/* ========================================================== */}
+            {/* 1. AGENT IMAGE: GPU COMPOSITOR GLIDE (ZERO LAYOUT LAG)     */}
+            {/* Height tuned to 78vh (max 760px) so helmet is never clipped */}
+            {/* ========================================================== */}
             <motion.div
               animate={{
-                scaleX: isImageOnLeft ? 1.35 : -1.35,
-                scaleY: 1.35,
+                x: isImageOnLeft ? '0%' : '100%',
               }}
               transition={{
-                scaleX: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
-                scaleY: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
+                duration: 0.65,
+                ease: [0.16, 1, 0.3, 1],
               }}
-              style={{ transformOrigin: 'bottom center' }}
-              className="relative flex justify-center items-end self-end select-none pb-0 mb-0 will-change-transform"
+              className="absolute bottom-0 left-0 w-full lg:w-1/2 h-full flex items-end justify-center pointer-events-none pb-0 mb-0 z-10 will-change-transform"
             >
-              <img
-                src="/images/Cropped.png"
-                alt={`Autonomous Agent - Stage ${currentStage.number}`}
-                style={{ height: '94vh', maxHeight: '1100px' }}
-                className="w-auto object-contain object-bottom select-none block drop-shadow-[0_20px_60px_rgba(168,85,247,0.5)] pointer-events-none pb-0 mb-0 align-bottom"
-              />
+              {/* Concentric Neon Halo */}
+              <div className="absolute w-[450px] h-[450px] sm:w-[580px] sm:h-[580px] rounded-full bg-gradient-to-tr from-purple-600/25 via-indigo-600/15 to-cyan-500/20 blur-[110px] pointer-events-none -bottom-10" />
+
+              {/* Agent Figure: Perfectly scaled, full helmet visible, 0 bottom gap */}
+              <motion.div
+                animate={{
+                  scaleX: isImageOnLeft ? 1 : -1,
+                }}
+                transition={{
+                  scaleX: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
+                }}
+                style={{ transformOrigin: 'bottom center' }}
+                className="relative flex justify-center items-end self-end select-none pb-0 mb-0 will-change-transform"
+              >
+                <img
+                  src="/images/Cropped.png"
+                  alt={`Autonomous Agent - Stage ${currentStage.number}`}
+                  style={{ height: '78vh', maxHeight: '760px' }}
+                  className="w-auto object-contain object-bottom select-none block drop-shadow-[0_20px_60px_rgba(168,85,247,0.45)] pointer-events-none pb-0 mb-0 align-bottom"
+                />
+              </motion.div>
             </motion.div>
-          </motion.div>
 
-          {/* ========================================================== */}
-          {/* 2. DETAILED CONTENT COLUMN: Dynamic Left/Right Alignment   */}
-          {/* Heading swoops in from side of screen, description current */}
-          {/* ========================================================== */}
-          <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-end h-full">
-            <div
-              className={`w-full py-6 lg:py-12 mb-4 sm:mb-8 lg:mb-12 relative z-20 flex flex-col justify-center self-center transition-all duration-300 ${
-                isImageOnLeft
-                  ? 'lg:col-start-2 items-end text-right'
-                  : 'lg:col-start-1 items-start text-left'
-              }`}
-            >
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentStage.number}
-                  className={`space-y-5 lg:space-y-6 max-w-2xl flex flex-col ${
-                    isImageOnLeft ? 'items-end text-right' : 'items-start text-left'
-                  }`}
-                >
-                  {/* Main Headline: COMING FROM THE SIDE OF THE SCREEN */}
-                  <motion.h3
-                    initial={{
-                      opacity: 0,
-                      x: isImageOnLeft ? 320 : -320,
-                    }}
-                    animate={{
-                      opacity: 1,
-                      x: 0,
-                    }}
-                    exit={{
-                      opacity: 0,
-                      x: isImageOnLeft ? 180 : -180,
-                    }}
-                    transition={{
-                      duration: 0.65,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                    className={`text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extralight text-white tracking-[-0.03em] leading-[1.12] ${
-                      isImageOnLeft ? 'text-right' : 'text-left'
-                    }`}
-                  >
-                    {currentStage.title}
-                  </motion.h3>
-
-                  {/* Narrative Body: CURRENT SMOOTH FADE-UP ANIMATION */}
-                  <motion.p
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{
-                      duration: 0.45,
-                      delay: 0.08,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                    className={`text-sm sm:text-base lg:text-lg text-zinc-300 font-light leading-relaxed max-w-2xl ${
-                      isImageOnLeft ? 'text-right' : 'text-left'
-                    }`}
-                  >
-                    {currentStage.description}
-                  </motion.p>
-
-                  {/* Detailed Operational Points: CURRENT SMOOTH STAGGER */}
-                  <div
-                    className={`space-y-3.5 pt-1 max-w-2xl w-full flex flex-col ${
+            {/* ========================================================== */}
+            {/* 2. DETAILED CONTENT COLUMN: Dynamic Left/Right Alignment   */}
+            {/* Heading swoops in from side of screen, description current */}
+            {/* ========================================================== */}
+            <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-end h-full">
+              <div
+                className={`w-full py-6 lg:py-12 mb-6 sm:mb-10 lg:mb-16 relative z-20 flex flex-col justify-center self-center transition-all duration-300 ${
+                  isImageOnLeft
+                    ? 'lg:col-start-2 items-end text-right'
+                    : 'lg:col-start-1 items-start text-left'
+                }`}
+              >
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentStage.number}
+                    className={`space-y-5 lg:space-y-6 max-w-2xl flex flex-col ${
                       isImageOnLeft ? 'items-end text-right' : 'items-start text-left'
                     }`}
                   >
-                    {currentStage.points.map((pt, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -6 }}
-                        transition={{
-                          duration: 0.4,
-                          delay: 0.15 + i * 0.07,
-                          ease: [0.16, 1, 0.3, 1],
-                        }}
-                        className={`flex items-start gap-2.5 max-w-xl ${
-                          isImageOnLeft
-                            ? 'flex-row-reverse text-right'
-                            : 'flex-row text-left'
-                        }`}
-                      >
-                        <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 shrink-0 shadow-[0_0_8px_rgba(34,211,238,0.85)]" />
-                        <div className={isImageOnLeft ? 'text-right' : 'text-left'}>
-                          <span className="text-xs sm:text-sm font-medium text-white tracking-wide">
-                            {pt.label}:{' '}
-                          </span>
-                          <span className="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
-                            {pt.detail}
-                          </span>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
+                    {/* Main Headline: COMING FROM THE SIDE OF THE SCREEN */}
+                    <motion.h3
+                      initial={{
+                        opacity: 0,
+                        x: isImageOnLeft ? 320 : -320,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        x: 0,
+                      }}
+                      exit={{
+                        opacity: 0,
+                        x: isImageOnLeft ? 180 : -180,
+                      }}
+                      transition={{
+                        duration: 0.65,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
+                      className={`text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extralight text-white tracking-[-0.03em] leading-[1.12] ${
+                        isImageOnLeft ? 'text-right' : 'text-left'
+                      }`}
+                    >
+                      {currentStage.title}
+                    </motion.h3>
 
+                    {/* Narrative Body: CURRENT SMOOTH FADE-UP ANIMATION */}
+                    <motion.p
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{
+                        duration: 0.45,
+                        delay: 0.08,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
+                      className={`text-sm sm:text-base lg:text-lg text-zinc-300 font-light leading-relaxed max-w-2xl ${
+                        isImageOnLeft ? 'text-right' : 'text-left'
+                      }`}
+                    >
+                      {currentStage.description}
+                    </motion.p>
+
+                    {/* Detailed Operational Points: CURRENT SMOOTH STAGGER */}
+                    <div
+                      className={`space-y-3.5 pt-1 max-w-2xl w-full flex flex-col ${
+                        isImageOnLeft ? 'items-end text-right' : 'items-start text-left'
+                      }`}
+                    >
+                      {currentStage.points.map((pt, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -6 }}
+                          transition={{
+                            duration: 0.4,
+                            delay: 0.15 + i * 0.07,
+                            ease: [0.16, 1, 0.3, 1],
+                          }}
+                          className={`flex items-start gap-2.5 max-w-xl ${
+                            isImageOnLeft
+                              ? 'flex-row-reverse text-right'
+                              : 'flex-row text-left'
+                          }`}
+                        >
+                          <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 shrink-0 shadow-[0_0_8px_rgba(34,211,238,0.85)]" />
+                          <div className={isImageOnLeft ? 'text-right' : 'text-left'}>
+                            <span className="text-xs sm:text-sm font-medium text-white tracking-wide">
+                              {pt.label}:{' '}
+                            </span>
+                            <span className="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
+                              {pt.detail}
+                            </span>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+
+          </div>
         </div>
+
+        {/* Minimalist Stage Indicator Dots */}
+        <div className="relative z-20 max-w-[1680px] mx-auto w-full flex items-center justify-between pb-4 border-t border-zinc-800/40 text-xs font-mono text-zinc-500">
+          <div className="flex items-center gap-2">
+            {STAGES.map((s, idx) => {
+              const isActive = idx === activeStage;
+              return (
+                <button
+                  key={s.number}
+                  onClick={() => handleStageClick(idx)}
+                  className={`transition-all duration-300 cursor-pointer ${
+                    isActive
+                      ? 'w-8 h-1.5 rounded-full bg-gradient-to-r from-purple-500 to-cyan-400 shadow-[0_0_10px_rgba(168,85,247,0.7)]'
+                      : 'w-2 h-1.5 rounded-full bg-zinc-800 hover:bg-zinc-600'
+                  }`}
+                  aria-label={`Jump to Stage ${s.number}`}
+                />
+              );
+            })}
+          </div>
+          <span className="text-zinc-500 font-mono text-xs">
+            LEVEL <span className="text-white font-semibold">{currentStage.number}</span> / 07
+          </span>
+        </div>
+
       </div>
     </section>
   );
 }
+
