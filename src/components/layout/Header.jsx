@@ -18,7 +18,7 @@ export default function Header() {
   const navLinks = [
     { name: 'Workflow', href: '#workflow' },
     { name: 'Capabilities', href: '#capabilities' },
-    { name: 'Stages', href: '#detailed-steps' },
+    { name: 'Stages', href: '#stages-deep-dive' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -27,7 +27,7 @@ export default function Header() {
       <div
         className={`max-w-7xl mx-auto rounded-full transition-all duration-300 ${
           scrolled
-            ? 'bg-zinc-950/80 backdrop-blur-xl border border-zinc-800/90 shadow-2xl shadow-purple-950/20 py-2.5 px-4 sm:px-6'
+            ? 'bg-zinc-950/80 backdrop-blur-xl border border-zinc-800/90 shadow-2xl shadow-orange-950/20 py-2.5 px-4 sm:px-6'
             : 'bg-zinc-950/40 backdrop-blur-md border border-zinc-800/40 py-3.5 px-5 sm:px-7'
         }`}
       >
@@ -37,7 +37,7 @@ export default function Header() {
            
             <div className="flex flex-col">
               <span className="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-1.5">
-                possible<span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">studio.ai</span>
+                possible<span className="bg-gradient-to-r from-orange-400 via-amber-400 to-orange-500 bg-clip-text text-transparent">studio.ai</span>
                
               </span>
             </div>

@@ -96,9 +96,9 @@ export default function WorkflowDetailedSteps() {
       category: 'CONCEPT INGESTION',
       tagline: 'Zero-shot prompt extraction in < 1.2s.',
       icon: Sparkles,
-      color: 'purple',
-      badgeClass: 'text-purple-300 bg-purple-500/10 border-purple-500/30',
-      glowColor: 'rgba(168, 85, 247, 0.35)',
+      color: 'orange',
+      badgeClass: 'text-orange-300 bg-orange-500/10 border-orange-500/30',
+      glowColor: 'rgba(249, 115, 22, 0.45)',
       description:
         'Founders and teams provide a single concept, rough note, or URL. The autonomous neural parser decomposes brand DNA, unique value propositions, tone of voice, and audience psychographics without any prompt engineering required.',
       specs: [
@@ -121,9 +121,9 @@ export default function WorkflowDetailedSteps() {
       category: 'GENERATIVE PRODUCTION',
       tagline: 'Multi-modal 4K visuals, copy & formats.',
       icon: Palette,
-      color: 'cyan',
-      badgeClass: 'text-cyan-300 bg-cyan-500/10 border-cyan-500/30',
-      glowColor: 'rgba(6, 182, 212, 0.35)',
+      color: 'amber',
+      badgeClass: 'text-amber-300 bg-amber-500/10 border-amber-500/30',
+      glowColor: 'rgba(245, 158, 11, 0.45)',
       description:
         'Orchestrates specialized diffusion, audio, and language models to synthesize 4K multi-ratio ad creatives in parallel. Generates high-converting 9:16 vertical reels, square feeds, and magnetic copy variations benchmarked against top historic performers.',
       specs: [
@@ -146,9 +146,9 @@ export default function WorkflowDetailedSteps() {
       category: 'OMNICHANNEL DEPLOY',
       tagline: 'Direct API handshake across platforms.',
       icon: Share2,
-      color: 'purple',
-      badgeClass: 'text-purple-300 bg-purple-500/10 border-purple-500/30',
-      glowColor: 'rgba(168, 85, 247, 0.35)',
+      color: 'orange',
+      badgeClass: 'text-orange-300 bg-orange-500/10 border-orange-500/30',
+      glowColor: 'rgba(249, 115, 22, 0.45)',
       description:
         'Direct machine-to-machine API publishing across Meta, TikTok, Instagram, and LinkedIn. Schedules campaigns within peak-engagement windows, automatically syncs trending audio stems, and attaches algorithmic high-intent hashtags.',
       specs: [
@@ -173,9 +173,9 @@ export default function WorkflowDetailedSteps() {
       category: 'PRECISION TARGETING',
       tagline: '500m precision geo-fencing & lookalikes.',
       icon: Target,
-      color: 'cyan',
-      badgeClass: 'text-cyan-300 bg-cyan-500/10 border-cyan-500/30',
-      glowColor: 'rgba(6, 182, 212, 0.35)',
+      color: 'amber',
+      badgeClass: 'text-amber-300 bg-amber-500/10 border-amber-500/30',
+      glowColor: 'rgba(245, 158, 11, 0.45)',
       description:
         'Constructs multidimensional audience vectors by blending buyer intent signals with real-time geo-coordinates and Lookalike models. Continuously prunes low-converting cohorts to ensure pinpoint 500m precision targeting efficiency.',
       specs: [
@@ -198,9 +198,9 @@ export default function WorkflowDetailedSteps() {
       category: 'CAPITAL EFFICIENCY',
       tagline: 'Feedback loop cuts losers within 3h.',
       icon: Sliders,
-      color: 'emerald',
-      badgeClass: 'text-emerald-300 bg-emerald-500/10 border-emerald-500/30',
-      glowColor: 'rgba(168, 85, 247, 0.35)',
+      color: 'orange',
+      badgeClass: 'text-orange-300 bg-orange-500/10 border-orange-500/30',
+      glowColor: 'rgba(249, 115, 22, 0.45)',
       description:
         'Autonomous capital reallocation powered by 3-hour closed feedback loops. The agent tracks click velocity and CPA in real time, automatically killing zero-traction ads and scaling liquid budget behind winning creatives to maximize ROAS.',
       specs: [
@@ -223,9 +223,9 @@ export default function WorkflowDetailedSteps() {
       category: 'INTENT CLASSIFICATION',
       tagline: 'Aggregated AI-scored live inbound stream.',
       icon: Users,
-      color: 'purple',
-      badgeClass: 'text-purple-300 bg-purple-500/10 border-purple-500/30',
-      glowColor: 'rgba(168, 85, 247, 0.35)',
+      color: 'amber',
+      badgeClass: 'text-amber-300 bg-amber-500/10 border-amber-500/30',
+      glowColor: 'rgba(245, 158, 11, 0.45)',
       description:
         'Aggregates inbound messages, comments, form submissions, and inquiries across all networks into a single priority stream. Evaluates buyer intent signals in seconds, scoring and routing high-value prospects for immediate conversion.',
       specs: [
@@ -248,9 +248,9 @@ export default function WorkflowDetailedSteps() {
       category: 'AUTONOMOUS CONVERSION',
       tagline: 'Sub-30s WhatsApp & DM conversational closing.',
       icon: Bot,
-      color: 'emerald',
-      badgeClass: 'text-emerald-300 bg-emerald-500/10 border-emerald-500/30',
-      glowColor: 'rgba(6, 182, 212, 0.35)',
+      color: 'orange',
+      badgeClass: 'text-orange-300 bg-orange-500/10 border-orange-500/30',
+      glowColor: 'rgba(249, 115, 22, 0.45)',
       description:
         'Autonomous conversational closer engages prospects on WhatsApp and DMs in under 30 seconds. Answers technical inquiries, resolves pricing objections, negotiates custom terms, and locks qualified demo calls directly onto calendars.',
       specs: [
@@ -274,8 +274,8 @@ export default function WorkflowDetailedSteps() {
       className="relative min-h-[85vh] lg:h-screen lg:max-h-[850px] flex flex-col justify-center py-6 sm:py-8 lg:py-10 bg-[#050505] overflow-hidden select-none"
     >
       {/* Background ambient lighting */}
-      <div className="absolute top-1/3 left-1/4 -translate-y-1/2 w-[650px] h-[500px] bg-purple-600/10 blur-[170px] pointer-events-none rounded-full" />
-      <div className="absolute bottom-1/4 right-1/4 w-[550px] h-[450px] bg-cyan-600/10 blur-[170px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/3 left-1/4 -translate-y-1/2 w-[650px] h-[500px] bg-orange-600/10 blur-[170px] pointer-events-none rounded-full" />
+      <div className="absolute bottom-1/4 right-1/4 w-[550px] h-[450px] bg-amber-600/10 blur-[170px] pointer-events-none rounded-full" />
 
       {/* Grid Pattern overlay */}
       <div className="absolute inset-0 bg-grid-pattern [background-size:32px_32px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_50%,#000_75%,transparent_100%)] opacity-15 pointer-events-none" />
@@ -309,7 +309,7 @@ export default function WorkflowDetailedSteps() {
                 ease: [0.16, 1, 0.3, 1],
                 delay: 0.2,
               }}
-              className="font-light bg-gradient-to-r from-purple-300 via-indigo-200 to-cyan-300 bg-clip-text text-transparent block mt-1"
+              className="font-light bg-gradient-to-r from-orange-400 via-amber-300 to-orange-500 bg-clip-text text-transparent block mt-1"
             >
               Stage by stage, in depth.
             </motion.span>
@@ -430,12 +430,6 @@ export default function WorkflowDetailedSteps() {
                         style={{ background: step.glowColor }}
                       />
 
-                      {/* FRONT TOP: Number badge & Diagonal Arrow */}
-                      <div className="flex items-center justify-between relative z-10 m-0 p-0">
-                        
-                        
-                      </div>
-
                       {/* ================================================== */}
                       {/* FRONT MIDDLE: CONTINUOUS SLICED HEADLINE           */}
                       {/* Spans across all 7 cards with zero unnatural gaps  */}
@@ -449,7 +443,7 @@ export default function WorkflowDetailedSteps() {
                         }}
                       >
                         <span
-                          className="font-extralight tracking-tight text-white/95 group-hover:text-purple-200 group-hover:drop-shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all duration-500 leading-none select-none whitespace-nowrap"
+                          className="font-extralight tracking-tight text-white/95 group-hover:text-orange-200 group-hover:drop-shadow-[0_0_20px_rgba(249,115,22,0.45)] transition-all duration-500 leading-none select-none whitespace-nowrap"
                           style={{
                             fontSize: rowMetrics.fontSize
                               ? `${rowMetrics.fontSize}px`
@@ -463,7 +457,7 @@ export default function WorkflowDetailedSteps() {
                       {/* FRONT BOTTOM: Category & Title */}
                       <div className="relative z-10 pt-2 border-t border-white/10 flex flex-col gap-0.5 m-0 p-0">
                         
-                        <h3 className="text-xs sm:text-sm font-light text-white tracking-tight mt-1 line-clamp-1 group-hover:text-purple-300 transition-colors duration-300">
+                        <h3 className="text-xs sm:text-sm font-light text-white tracking-tight mt-1 line-clamp-1 group-hover:text-orange-300 transition-colors duration-300">
                           {step.title}
                         </h3>
                        
@@ -481,7 +475,7 @@ export default function WorkflowDetailedSteps() {
                         WebkitBackfaceVisibility: 'hidden',
                         transform: 'rotateY(180deg)',
                       }}
-                      className="absolute inset-0 w-full h-full rounded-2xl border border-white/60 bg-[#09090b] p-5 sm:p-6 flex flex-col justify-center overflow-hidden shadow-2xl shadow-purple-950/70 select-none"
+                      className="absolute inset-0 w-full h-full rounded-2xl border border-white/60 bg-[#09090b] p-5 sm:p-6 flex flex-col justify-center overflow-hidden shadow-2xl shadow-orange-950/70 select-none"
                     >
                       {/* Localized Back Glow */}
                       <motion.div
@@ -534,7 +528,7 @@ export default function WorkflowDetailedSteps() {
                             delay: 0.28,
                             ease: [0.16, 1, 0.3, 1],
                           }}
-                          className="w-10 h-[2px] bg-gradient-to-r from-purple-400 to-cyan-400 rounded-full origin-left"
+                          className="w-10 h-[2px] bg-gradient-to-r from-orange-400 to-amber-400 rounded-full origin-left"
                         />
 
                         <motion.p

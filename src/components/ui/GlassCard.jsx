@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 export default function GlassCard({
   children,
   className = '',
-  glowColor = 'purple', // 'purple' | 'cyan' | 'emerald' | 'none'
+  glowColor = 'orange', // 'orange' | 'amber' | 'cyan' | 'purple' | 'emerald' | 'none'
   spotlight = true,
   hoverLift = true,
   onClick,
@@ -27,10 +27,20 @@ export default function GlassCard({
   };
 
   const glowStyles = {
+    orange: {
+      border: 'hover:border-orange-500/60',
+      light: 'rgba(249, 115, 22, 0.16)',
+      pill: 'bg-orange-500/10 text-orange-300 border-orange-500/30',
+    },
+    amber: {
+      border: 'hover:border-amber-500/60',
+      light: 'rgba(245, 158, 11, 0.16)',
+      pill: 'bg-amber-500/10 text-amber-300 border-amber-500/30',
+    },
     purple: {
-      border: 'hover:border-purple-500/50',
-      light: 'rgba(168, 85, 247, 0.12)',
-      pill: 'bg-purple-500/10 text-purple-300 border-purple-500/30',
+      border: 'hover:border-orange-500/50',
+      light: 'rgba(249, 115, 22, 0.14)',
+      pill: 'bg-orange-500/10 text-orange-300 border-orange-500/30',
     },
     cyan: {
       border: 'hover:border-cyan-500/50',
@@ -49,7 +59,7 @@ export default function GlassCard({
     },
   };
 
-  const currentGlow = glowStyles[glowColor] || glowStyles.purple;
+  const currentGlow = glowStyles[glowColor] || glowStyles.orange;
 
   return (
     <motion.div

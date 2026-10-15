@@ -26,17 +26,17 @@ export default function Button({
 
   // Variant styling matching the luxury dark aesthetic
   const variantClasses = {
-    // Electric purple to deep indigo gradient with ambient back-glow
+    // Electric orange to warm amber gradient with ambient back-glow
     primary:
-      'bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-500 text-white shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:from-purple-500 hover:to-indigo-500 border border-purple-400/30',
+      'bg-gradient-to-r from-orange-600 via-amber-600 to-orange-500 text-white shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:from-orange-500 hover:to-amber-500 border border-orange-400/40',
     
     // Subtle frosted glass with thin zinc boundary
     secondary:
-      'bg-zinc-900/70 hover:bg-zinc-800/80 text-zinc-200 hover:text-white border border-zinc-700/60 hover:border-zinc-500/60 backdrop-blur-md shadow-md',
+      'bg-zinc-900/70 hover:bg-zinc-800/80 text-zinc-200 hover:text-white border border-zinc-700/60 hover:border-orange-500/40 backdrop-blur-md shadow-md',
     
     // Electric cyan neon glowing pill
     glow:
-      'bg-gradient-to-r from-cyan-500 to-blue-600 text-black font-bold shadow-lg shadow-cyan-500/30 hover:shadow-cyan-400/50 hover:brightness-110 border border-cyan-300/50',
+      'bg-gradient-to-r from-orange-500 to-amber-500 text-black font-bold shadow-lg shadow-orange-500/30 hover:shadow-orange-400/50 hover:brightness-110 border border-orange-300/50',
     
     // High-conversion emerald accent
     emerald:
@@ -48,7 +48,7 @@ export default function Button({
 
     // Sharp outline
     outline:
-      'bg-transparent border border-zinc-800 hover:border-purple-500/80 text-zinc-300 hover:text-white hover:bg-purple-950/20',
+      'bg-transparent border border-zinc-800 hover:border-orange-500/80 text-zinc-300 hover:text-white hover:bg-orange-950/20',
   };
 
   return (

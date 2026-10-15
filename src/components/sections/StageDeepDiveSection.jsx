@@ -245,8 +245,8 @@ export default function StageDeepDiveSection() {
       <div className="sticky top-0 h-screen w-full flex flex-col justify-end pt-0 pb-0 px-4 sm:px-6 lg:px-12 overflow-hidden bg-[#050505] select-none">
         
         {/* Background ambient lighting */}
-        <div className="absolute top-1/4 left-1/4 -translate-y-1/2 w-[650px] h-[450px] bg-purple-600/10 blur-[140px] pointer-events-none rounded-full will-change-transform" />
-        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[450px] bg-cyan-600/10 blur-[140px] pointer-events-none rounded-full will-change-transform" />
+        <div className="absolute top-1/4 left-1/4 -translate-y-1/2 w-[650px] h-[450px] bg-orange-600/10 blur-[140px] pointer-events-none rounded-full will-change-transform" />
+        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[450px] bg-amber-600/10 blur-[140px] pointer-events-none rounded-full will-change-transform" />
         <div className="absolute inset-0 bg-grid-pattern [background-size:32px_32px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_50%,#000_70%,transparent_100%)] opacity-15 pointer-events-none" />
 
         {/* ============================================================== */}
@@ -270,7 +270,7 @@ export default function StageDeepDiveSection() {
               className="absolute bottom-0 left-0 w-full lg:w-1/2 h-full flex items-end justify-center pointer-events-none pb-0 mb-0 z-10 will-change-transform"
             >
               {/* Concentric Neon Halo */}
-              <div className="absolute w-[450px] h-[450px] sm:w-[580px] sm:h-[580px] rounded-full bg-gradient-to-tr from-purple-600/25 via-indigo-600/15 to-cyan-500/20 blur-[110px] pointer-events-none -bottom-10" />
+              <div className="absolute w-[450px] h-[450px] sm:w-[580px] sm:h-[580px] rounded-full bg-gradient-to-tr from-orange-600/25 via-amber-600/15 to-orange-500/20 blur-[110px] pointer-events-none -bottom-10" />
 
               {/* Agent Figure: Perfectly scaled, full helmet visible, 0 bottom gap */}
               <motion.div
@@ -284,10 +284,10 @@ export default function StageDeepDiveSection() {
                 className="relative flex justify-center items-end self-end select-none pb-0 mb-0 will-change-transform"
               >
                 <img
-                  src="/images/Cropped.png"
+                  src="/images/orenge-1.webp"
                   alt={`Autonomous Agent - Stage ${currentStage.number}`}
                   style={{ height: '78vh', maxHeight: '760px' }}
-                  className="w-auto object-contain object-bottom select-none block drop-shadow-[0_20px_60px_rgba(168,85,247,0.45)] pointer-events-none pb-0 mb-0 align-bottom"
+                  className="w-auto object-contain object-bottom select-none block drop-shadow-[0_20px_60px_rgba(249,115,22,0.45)] pointer-events-none pb-0 mb-0 align-bottom"
                 />
               </motion.div>
             </motion.div>
@@ -376,7 +376,7 @@ export default function StageDeepDiveSection() {
                               : 'flex-row text-left'
                           }`}
                         >
-                          <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 shrink-0 shadow-[0_0_8px_rgba(34,211,238,0.85)]" />
+                          <div className="w-1.5 h-1.5 rounded-full bg-orange-400 mt-2 shrink-0 shadow-[0_0_8px_rgba(249,115,22,0.85)]" />
                           <div className={isImageOnLeft ? 'text-right' : 'text-left'}>
                             <span className="text-xs sm:text-sm font-medium text-white tracking-wide">
                               {pt.label}:{' '}
@@ -407,7 +407,7 @@ export default function StageDeepDiveSection() {
                   onClick={() => handleStageClick(idx)}
                   className={`transition-all duration-300 cursor-pointer ${
                     isActive
-                      ? 'w-8 h-1.5 rounded-full bg-gradient-to-r from-purple-500 to-cyan-400 shadow-[0_0_10px_rgba(168,85,247,0.7)]'
+                      ? 'w-8 h-1.5 rounded-full bg-gradient-to-r from-orange-500 to-amber-400 shadow-[0_0_10px_rgba(249,115,22,0.7)]'
                       : 'w-2 h-1.5 rounded-full bg-zinc-800 hover:bg-zinc-600'
                   }`}
                   aria-label={`Jump to Stage ${s.number}`}

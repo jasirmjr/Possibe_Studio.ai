@@ -15,6 +15,10 @@ export default {
           card: 'rgba(18, 18, 22, 0.65)',
         },
         neon: {
+          orange: '#ff6b00',
+          orangeLight: '#ff8c38',
+          amber: '#f59e0b',
+          amberLight: '#fbbf24',
           purple: '#a855f7',
           violet: '#8b5cf6',
           cyan: '#06b6d4',
@@ -33,6 +37,7 @@ export default {
       backgroundImage: {
         'radial-gradient': 'radial-gradient(ellipse at center, var(--tw-gradient-stops))',
         'grid-pattern': "radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px)",
+        'glow-orange': 'radial-gradient(circle, rgba(255, 107, 0, 0.18) 0%, transparent 70%)',
         'glow-purple': 'radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%)',
         'glow-cyan': 'radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%)',
       },

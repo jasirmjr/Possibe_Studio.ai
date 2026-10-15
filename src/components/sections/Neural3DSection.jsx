@@ -53,13 +53,13 @@ export default function Neural3DSection() {
     const PARTICLE_COUNT = 160;
     const particles = [];
 
-    // Brand Neon Colors (Electric Purple, Cyan, Indigo, Violet)
+    // Brand Neon Colors (Cyberpunk Orange, Warm Amber, Golden Flame)
     const colorPalette = [
-      { r: 168, g: 85, b: 247 }, // Purple
-      { r: 6, g: 182, b: 212 },  // Cyan
-      { r: 139, g: 92, b: 246 }, // Violet
-      { r: 99, g: 102, b: 241 },  // Indigo
-      { r: 216, g: 180, b: 254 }, // Light Purple Highlight
+      { r: 249, g: 115, b: 22 }, // Neon Orange
+      { r: 245, g: 158, b: 11 }, // Warm Amber
+      { r: 234, g: 88, b: 12 },  // Deep Flame Orange
+      { r: 251, g: 191, b: 36 }, // Golden Amber
+      { r: 255, g: 160, b: 64 }, // Bright Amber Highlight
     ];
 
     class FallingNeuralNode {
@@ -229,8 +229,10 @@ export default function Neural3DSection() {
     <section
       ref={sectionRef}
       id="capabilities"
-      className="relative min-h-[65vh] lg:min-h-[520px] flex flex-col justify-center items-center pt-4 pb-4 lg:pt-6 lg:pb-6 bg-[#050505] overflow-hidden select-none"
+      className="relative z-20 min-h-screen flex flex-col justify-center items-center pt-16 pb-16 lg:pt-24 lg:pb-24 bg-[#050505] overflow-hidden select-none -mt-[100vh] shadow-[0_-30px_90px_rgba(0,0,0,0.98)] border-t border-orange-500/30"
     >
+      {/* Glowing Neon Cyber Edge when sliding over Section 2 */}
+      <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-orange-500 to-transparent shadow-[0_0_20px_#ff6b00] z-30" />
       {/* ================================================================ */}
       {/* 1. REALISTIC FALLING NEURAL PARTICLES & SYNAPSES CANVAS         */}
       {/* ================================================================ */}
@@ -242,8 +244,8 @@ export default function Neural3DSection() {
       </div>
 
       {/* Ambient background glows */}
-      <div className="absolute top-1/4 left-1/3 -translate-y-1/2 w-[700px] h-[550px] bg-purple-600/10 blur-[190px] pointer-events-none rounded-full" />
-      <div className="absolute bottom-1/4 right-1/3 w-[550px] h-[450px] bg-cyan-600/10 blur-[180px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/4 left-1/3 -translate-y-1/2 w-[700px] h-[550px] bg-orange-600/10 blur-[190px] pointer-events-none rounded-full" />
+      <div className="absolute bottom-1/4 right-1/3 w-[550px] h-[450px] bg-amber-600/10 blur-[180px] pointer-events-none rounded-full" />
 
       {/* Subtle Grid Pattern Overlay */}
       <div className="absolute inset-0 bg-grid-pattern [background-size:32px_32px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_50%,#000_75%,transparent_100%)] opacity-15 pointer-events-none z-0" />
@@ -283,7 +285,7 @@ export default function Neural3DSection() {
               ease: [0.16, 1, 0.3, 1],
               delay: 0.2,
             }}
-            className="font-light bg-gradient-to-r from-purple-300 via-indigo-200 to-cyan-300 bg-clip-text text-transparent block mt-2"
+            className="font-light bg-gradient-to-r from-orange-400 via-amber-300 to-orange-500 bg-clip-text text-transparent block mt-2"
           >
             Closed deals on autopilot.
           </motion.span>

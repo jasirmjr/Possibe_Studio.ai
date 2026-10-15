@@ -38,17 +38,23 @@
 }
 
 @layer utilities {
+  .text-glow-orange {
+    text-shadow: 0 0 20px rgba(249, 115, 22, 0.65), 0 0 40px rgba(249, 115, 22, 0.25);
+  }
+  .box-glow-orange {
+    box-shadow: 0 0 35px -5px rgba(249, 115, 22, 0.4);
+  }
   .text-glow-purple {
-    text-shadow: 0 0 20px rgba(168, 85, 247, 0.6), 0 0 40px rgba(168, 85, 247, 0.2);
+    text-shadow: 0 0 20px rgba(249, 115, 22, 0.6), 0 0 40px rgba(249, 115, 22, 0.2);
   }
   .text-glow-cyan {
-    text-shadow: 0 0 20px rgba(6, 182, 212, 0.6), 0 0 40px rgba(6, 182, 212, 0.2);
+    text-shadow: 0 0 20px rgba(245, 158, 11, 0.6), 0 0 40px rgba(245, 158, 11, 0.2);
   }
   .box-glow-purple {
-    box-shadow: 0 0 30px -5px rgba(168, 85, 247, 0.35);
+    box-shadow: 0 0 30px -5px rgba(249, 115, 22, 0.35);
   }
   .box-glow-cyan {
-    box-shadow: 0 0 30px -5px rgba(6, 182, 212, 0.35);
+    box-shadow: 0 0 30px -5px rgba(245, 158, 11, 0.35);
   }
   .box-glow-emerald {
     box-shadow: 0 0 30px -5px rgba(16, 185, 129, 0.35);
@@ -62,3 +68,145 @@
     border-color: rgba(255, 255, 255, 0.08);
   }
 }
+
+/* ============================================================== */
+/* CYBERPUNK VIDEO GLITCH & SCANLINE EFFECTS                      */
+/* ============================================================== */
+
+@keyframes scanline-drift {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+.animate-scanline {
+  animation: scanline-drift 8s linear infinite;
+}
+
+/* Horizontal Slice Glitch Layer 1 (Cyan / Green channel) */
+@keyframes glitch-slice-1 {
+  0%, 100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: translate(0, 0);
+  }
+  15% {
+    clip-path: polygon(0 12%, 100% 12%, 100% 26%, 0 26%);
+    transform: translate(-14px, 2px);
+  }
+  30% {
+    clip-path: polygon(0 38%, 100% 38%, 100% 52%, 0 52%);
+    transform: translate(16px, -3px);
+  }
+  45% {
+    clip-path: polygon(0 64%, 100% 64%, 100% 78%, 0 78%);
+    transform: translate(-18px, 1px);
+  }
+  60% {
+    clip-path: polygon(0 5%, 100% 5%, 100% 18%, 0 18%);
+    transform: translate(12px, -2px);
+  }
+  75% {
+    clip-path: polygon(0 82%, 100% 82%, 100% 95%, 0 95%);
+    transform: translate(-14px, 3px);
+  }
+  90% {
+    clip-path: polygon(0 28%, 100% 28%, 100% 42%, 0 42%);
+    transform: translate(8px, 1px);
+  }
+}
+
+/* Horizontal Slice Glitch Layer 2 (Magenta / Red channel) */
+@keyframes glitch-slice-2 {
+  0%, 100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: translate(0, 0);
+  }
+  12% {
+    clip-path: polygon(0 22%, 100% 22%, 100% 36%, 0 36%);
+    transform: translate(18px, -2px);
+  }
+  28% {
+    clip-path: polygon(0 48%, 100% 48%, 100% 62%, 0 62%);
+    transform: translate(-16px, 3px);
+  }
+  42% {
+    clip-path: polygon(0 8%, 100% 8%, 100% 20%, 0 20%);
+    transform: translate(14px, -1px);
+  }
+  58% {
+    clip-path: polygon(0 72%, 100% 72%, 100% 86%, 0 86%);
+    transform: translate(-12px, 2px);
+  }
+  72% {
+    clip-path: polygon(0 32%, 100% 32%, 100% 46%, 0 46%);
+    transform: translate(16px, -3px);
+  }
+  88% {
+    clip-path: polygon(0 58%, 100% 58%, 100% 70%, 0 70%);
+    transform: translate(-10px, 1px);
+  }
+}
+
+@keyframes glitch-jitter {
+  0%, 100% { transform: translate(0, 0) skew(0deg); }
+  20% { transform: translate(-3px, 1px) skew(-1.5deg); }
+  40% { transform: translate(3px, -1px) skew(1.5deg); }
+  60% { transform: translate(-2px, 2px) skew(-0.8deg); }
+  80% { transform: translate(2px, -2px) skew(0.8deg); }
+}
+
+.glitch-active-1 {
+  animation: glitch-slice-1 0.28s steps(2, start) infinite, glitch-jitter 0.2s infinite;
+}
+
+.glitch-active-2 {
+  animation: glitch-slice-2 0.28s steps(2, start) infinite;
+}
+
+.crt-overlay {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.45) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.04),
+    rgba(0, 255, 0, 0.02),
+    rgba(0, 0, 255, 0.04)
+  );
+  background-size: 100% 3px, 6px 100%;
+}
+
+@keyframes cyber-grid-drift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 64px;
+  }
+}
+
+.cyber-grid-plane {
+  background-image: 
+    linear-gradient(to right, rgba(249, 115, 22, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(245, 158, 11, 0.15) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: cyber-grid-drift 3s linear infinite;
+}
+
+@keyframes ripple-pulse {
+  0% {
+    transform: scale(0.7) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.85) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  animation: ripple-pulse 3.5s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+}
+
