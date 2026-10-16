@@ -3,6 +3,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import HeroSection from './components/hero/HeroSection';
 import WorkflowSteps from './components/sections/WorkflowSteps';
+import HumanoidMatrixSection from './components/sections/HumanoidMatrixSection';
 import StageDeepDiveSection from './components/sections/StageDeepDiveSection';
 import ContactSection from './components/sections/ContactSection';
 
@@ -12,7 +13,7 @@ import ContactSection from './components/sections/ContactSection';
  */
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#050505] text-zinc-100 flex flex-col selection:bg-orange-500/30 selection:text-orange-200">
+    <div className="min-h-screen bg-white text-zinc-900 flex flex-col selection:bg-orange-500/25 selection:text-orange-950">
       {/* Global Header Navigation */}
       <Header />
 
@@ -21,13 +22,16 @@ export default function App() {
         {/* 1. Hero Section: Cinematic reveal with close-up agent graphic */}
         <HeroSection />
 
-        {/* 2 & 3. 7-Stage Workflow transitioning into Section 3 Split Left-Slide Overlay */}
+        {/* 2. 7-Stage Workflow Steps */}
         <WorkflowSteps />
 
-        {/* 5. Stage-by-Stage Scroll Pinned Narrative (Alternating Agent View) */}
+        {/* 3. Kinetic Typographic Humanoid Robot Matrix Animation */}
+        <HumanoidMatrixSection />
+
+        {/* 4. Stage-by-Stage Scroll Pinned Narrative (Alternating Agent View) */}
         <StageDeepDiveSection />
 
-        {/* 6. High-Impact Contact & Pipeline Deployment */}
+        {/* 5. High-Impact Contact & Pipeline Deployment */}
         <ContactSection />
       </main>
 

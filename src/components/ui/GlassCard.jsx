@@ -28,34 +28,34 @@ export default function GlassCard({
 
   const glowStyles = {
     orange: {
-      border: 'hover:border-orange-500/60',
-      light: 'rgba(249, 115, 22, 0.16)',
-      pill: 'bg-orange-500/10 text-orange-300 border-orange-500/30',
+      border: 'hover:border-orange-500/70',
+      light: 'rgba(249, 115, 22, 0.12)',
+      pill: 'bg-orange-50 text-orange-600 border-orange-200',
     },
     amber: {
-      border: 'hover:border-amber-500/60',
-      light: 'rgba(245, 158, 11, 0.16)',
-      pill: 'bg-amber-500/10 text-amber-300 border-amber-500/30',
+      border: 'hover:border-amber-500/70',
+      light: 'rgba(245, 158, 11, 0.12)',
+      pill: 'bg-amber-50 text-amber-600 border-amber-200',
     },
     purple: {
-      border: 'hover:border-orange-500/50',
-      light: 'rgba(249, 115, 22, 0.14)',
-      pill: 'bg-orange-500/10 text-orange-300 border-orange-500/30',
+      border: 'hover:border-orange-500/60',
+      light: 'rgba(249, 115, 22, 0.10)',
+      pill: 'bg-orange-50 text-orange-600 border-orange-200',
     },
     cyan: {
-      border: 'hover:border-cyan-500/50',
-      light: 'rgba(6, 182, 212, 0.12)',
-      pill: 'bg-cyan-500/10 text-cyan-300 border-cyan-500/30',
+      border: 'hover:border-cyan-500/60',
+      light: 'rgba(6, 182, 212, 0.10)',
+      pill: 'bg-cyan-50 text-cyan-600 border-cyan-200',
     },
     emerald: {
-      border: 'hover:border-emerald-500/50',
-      light: 'rgba(16, 185, 129, 0.12)',
-      pill: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30',
+      border: 'hover:border-emerald-500/60',
+      light: 'rgba(16, 185, 129, 0.10)',
+      pill: 'bg-emerald-50 text-emerald-600 border-emerald-200',
     },
     none: {
-      border: 'hover:border-zinc-700',
+      border: 'hover:border-zinc-300',
       light: 'transparent',
-      pill: 'bg-zinc-800 text-zinc-300 border-zinc-700',
+      pill: 'bg-zinc-100 text-zinc-700 border-zinc-200',
     },
   };
 
@@ -68,7 +68,7 @@ export default function GlassCard({
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
       whileHover={hoverLift ? { y: -4, transition: { duration: 0.25 } } : {}}
-      className={`relative rounded-2xl bg-zinc-950/60 backdrop-blur-xl border border-zinc-800/80 p-6 transition-all duration-300 overflow-hidden shadow-xl ${currentGlow.border} ${className}`}
+      className={`relative rounded-2xl bg-white/85 backdrop-blur-xl border border-zinc-200/90 p-6 transition-all duration-300 overflow-hidden shadow-lg shadow-orange-500/5 ${currentGlow.border} ${className}`}
       {...props}
     >
       {/* Dynamic Cursor Spotlight Overlay */}

@@ -197,7 +197,7 @@ export default function CapabilitiesWorkflowSection({ scrollYProgress }) {
       </motion.div>
 
       {/* ============================================================== */}
-      {/* RIGHT PART: SOLID OPAQUE DARK BACKGROUND (#050505)             */}
+      {/* RIGHT PART: SOLID OPAQUE WHITE BACKGROUND                      */}
       {/* SLIDES IN FROM TOP TO BOTTOM                                   */}
       {/* PRESENT FROM THE FIRST SCROLL ONWARDS! NO 7 CARDS!             */}
       {/* High-Impact Performance Metrics & Live Agent Telemetry Console */}
@@ -207,30 +207,30 @@ export default function CapabilitiesWorkflowSection({ scrollYProgress }) {
           y: rightY,
           pointerEvents: isInteractive ? 'auto' : 'none',
         }}
-        className="relative z-20 w-full lg:w-1/2 h-full bg-[#050505] text-zinc-100 flex flex-col justify-between p-6 sm:p-10 lg:p-14 overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.85)]"
+        className="relative z-20 w-full lg:w-1/2 h-full bg-white text-zinc-900 flex flex-col justify-between p-6 sm:p-10 lg:p-14 overflow-hidden shadow-[-10px_25px_50px_rgba(0,0,0,0.06)] border-l border-zinc-200/80"
       >
-        {/* Subtle Ambient Cosmic Lighting */}
-        <div className="absolute top-1/4 right-1/4 w-[500px] h-[450px] bg-orange-600/10 blur-[180px] pointer-events-none rounded-full" />
-        <div className="absolute bottom-1/4 right-1/3 w-[400px] h-[350px] bg-amber-600/10 blur-[160px] pointer-events-none rounded-full" />
+        {/* Subtle Ambient Warm Lighting */}
+        <div className="absolute top-1/4 right-1/4 w-[500px] h-[450px] bg-orange-500/10 blur-[160px] pointer-events-none rounded-full" />
+        <div className="absolute bottom-1/4 right-1/3 w-[400px] h-[350px] bg-amber-500/10 blur-[150px] pointer-events-none rounded-full" />
 
-        {/* Aerospace Background Grid Pattern */}
-        <div className="absolute inset-0 bg-grid-pattern [background-size:32px_32px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_50%,#000_75%,transparent_100%)] opacity-15 pointer-events-none" />
+        {/* Crisp Background Grid Pattern */}
+        <div className="absolute inset-0 bg-grid-pattern [background-size:32px_32px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_50%,#000_75%,transparent_100%)] opacity-35 pointer-events-none" />
 
         {/* TOP HEADER: High-Tech Telemetry Badge & Title */}
         <div className="relative z-10 max-w-lg pt-4 sm:pt-6">
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-orange-950/60 border border-orange-500/30 text-[10px] font-mono text-orange-400 mb-3 font-semibold">
-            <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-orange-50 border border-orange-200 text-[10px] font-mono text-orange-600 mb-3 font-semibold shadow-xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
             AUTONOMOUS PERFORMANCE ENGINE
           </div>
 
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-tight leading-[1.12]">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-zinc-950 tracking-tight leading-[1.12]">
             Precision Intelligence. <br />
-            <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-orange-500 bg-clip-text text-transparent font-light">
+            <span className="bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 bg-clip-text text-transparent font-normal">
               Closed Deals at Machine Speed.
             </span>
           </h3>
 
-          <p className="text-xs sm:text-sm font-light text-zinc-400 mt-2 leading-relaxed">
+          <p className="text-xs sm:text-sm font-light text-zinc-600 mt-2 leading-relaxed">
             Eliminate prompt friction and manual ad ops. Deploy specialized neural models executing closed-loop marketing arbitrage across all major networks simultaneously.
           </p>
         </div>
@@ -243,29 +243,29 @@ export default function CapabilitiesWorkflowSection({ scrollYProgress }) {
             return (
               <div
                 key={idx}
-                className="group p-4 sm:p-5 rounded-xl border border-white/10 bg-zinc-950/80 hover:border-orange-500/50 hover:bg-zinc-900/60 transition-all duration-300 relative overflow-hidden shadow-lg shadow-black/40"
+                className="group p-4 sm:p-5 rounded-xl border border-zinc-200/90 bg-white/95 hover:border-orange-500/60 hover:shadow-xl hover:shadow-orange-500/10 transition-all duration-300 relative overflow-hidden shadow-md shadow-zinc-200/40"
               >
                 {/* Micro corner ambient glow on hover */}
                 <div className="absolute -top-8 -right-8 w-20 h-20 rounded-full bg-orange-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[8px] font-mono tracking-wider text-orange-400/90 font-bold uppercase">
+                  <span className="text-[9px] font-mono tracking-wider text-orange-600 font-bold uppercase">
                     {metric.badge}
                   </span>
-                  <div className="w-6 h-6 rounded-md bg-zinc-900 border border-zinc-800 flex items-center justify-center text-orange-400 group-hover:scale-110 transition-transform">
+                  <div className="w-6 h-6 rounded-md bg-orange-50 border border-orange-200/80 flex items-center justify-center text-orange-600 group-hover:scale-110 transition-transform">
                     <MetricIcon className="w-3.5 h-3.5" />
                   </div>
                 </div>
 
-                <div className="text-2xl sm:text-3xl font-light text-white tracking-tight leading-none mb-1 group-hover:text-orange-200 transition-colors">
+                <div className="text-2xl sm:text-3xl font-light text-zinc-950 tracking-tight leading-none mb-1 group-hover:text-orange-600 transition-colors">
                   {metric.value}
                 </div>
 
-                <div className="text-xs font-medium text-zinc-300 tracking-tight mb-1">
+                <div className="text-xs font-semibold text-zinc-800 tracking-tight mb-1">
                   {metric.label}
                 </div>
 
-                <p className="text-[10px] text-zinc-500 font-light leading-snug line-clamp-2">
+                <p className="text-[11px] text-zinc-500 font-light leading-snug line-clamp-2">
                   {metric.detail}
                 </p>
               </div>
@@ -274,11 +274,11 @@ export default function CapabilitiesWorkflowSection({ scrollYProgress }) {
         </div>
 
         {/* BOTTOM: TELEMETRY STATUS CHIP & ACTION CTA */}
-        <div className="relative z-10 pt-4 border-t border-zinc-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <div className="flex items-center gap-2 text-[10px] font-mono text-zinc-400">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-zinc-300 font-medium">CORE STATUS:</span>
-            <span className="text-orange-400">100% AUTOMATED</span>
+        <div className="relative z-10 pt-4 border-t border-zinc-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-2 text-[10px] font-mono text-zinc-600">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-zinc-700 font-medium">CORE STATUS:</span>
+            <span className="text-orange-600 font-semibold">100% AUTOMATED</span>
           </div>
 
           <Button

@@ -24,31 +24,31 @@ export default function Button({
     lg: 'px-7 py-3.5 text-base font-semibold tracking-wider rounded-full gap-2.5',
   };
 
-  // Variant styling matching the luxury dark aesthetic
+  // Variant styling matching the luxury orange & white aesthetic
   const variantClasses = {
     // Electric orange to warm amber gradient with ambient back-glow
     primary:
-      'bg-gradient-to-r from-orange-600 via-amber-600 to-orange-500 text-white shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:from-orange-500 hover:to-amber-500 border border-orange-400/40',
+      'bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 text-white shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:from-orange-600 hover:to-amber-600 border border-orange-400/40',
     
-    // Subtle frosted glass with thin zinc boundary
+    // Subtle frosted white glass with thin boundary
     secondary:
-      'bg-zinc-900/70 hover:bg-zinc-800/80 text-zinc-200 hover:text-white border border-zinc-700/60 hover:border-orange-500/40 backdrop-blur-md shadow-md',
+      'bg-white hover:bg-zinc-50 text-zinc-800 hover:text-orange-600 border border-zinc-200/90 hover:border-orange-500/40 shadow-sm backdrop-blur-md',
     
-    // Electric cyan neon glowing pill
+    // Electric orange glowing pill
     glow:
-      'bg-gradient-to-r from-orange-500 to-amber-500 text-black font-bold shadow-lg shadow-orange-500/30 hover:shadow-orange-400/50 hover:brightness-110 border border-orange-300/50',
+      'bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:brightness-105 border border-orange-300/50',
     
     // High-conversion emerald accent
     emerald:
-      'bg-gradient-to-r from-emerald-500 to-teal-600 text-black font-bold shadow-lg shadow-emerald-500/30 hover:shadow-emerald-400/50 border border-emerald-300/40',
+      'bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold shadow-lg shadow-emerald-500/30 hover:shadow-emerald-400/50 border border-emerald-300/40',
     
     // Minimal transparent button with glowing hover
     ghost:
-      'bg-transparent hover:bg-zinc-800/50 text-zinc-400 hover:text-white border border-transparent hover:border-zinc-700/40',
+      'bg-transparent hover:bg-orange-50/60 text-zinc-600 hover:text-orange-600 border border-transparent hover:border-orange-200',
 
     // Sharp outline
     outline:
-      'bg-transparent border border-zinc-800 hover:border-orange-500/80 text-zinc-300 hover:text-white hover:bg-orange-950/20',
+      'bg-transparent border border-zinc-300 hover:border-orange-500 text-zinc-700 hover:text-orange-600 hover:bg-orange-50/40',
   };
 
   return (

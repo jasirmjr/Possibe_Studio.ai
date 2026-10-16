@@ -60,14 +60,14 @@ export default function ContactSection() {
     <section
       ref={sectionRef}
       id="contact"
-      className="relative min-h-screen py-16 sm:py-20 lg:py-24 bg-[#050505] overflow-hidden select-none flex flex-col justify-center"
+      className="relative min-h-screen py-16 sm:py-20 lg:py-24 bg-white overflow-hidden select-none flex flex-col justify-center"
     >
       {/* Background ambient lighting */}
-      <div className="absolute top-1/4 left-1/3 -translate-y-1/2 w-[700px] h-[500px] bg-orange-600/10 blur-[180px] pointer-events-none rounded-full" />
-      <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[500px] bg-amber-600/10 blur-[180px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/4 left-1/3 -translate-y-1/2 w-[700px] h-[500px] bg-orange-500/10 blur-[180px] pointer-events-none rounded-full" />
+      <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[500px] bg-amber-500/10 blur-[180px] pointer-events-none rounded-full" />
 
       {/* Grid Pattern overlay */}
-      <div className="absolute inset-0 bg-grid-pattern [background-size:32px_32px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_50%,#000_75%,transparent_100%)] opacity-15 pointer-events-none" />
+      <div className="absolute inset-0 bg-grid-pattern [background-size:32px_32px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_50%,#000_75%,transparent_100%)] opacity-35 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         
@@ -76,7 +76,7 @@ export default function ContactSection() {
         {/* ============================================================== */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extralight text-white tracking-[-0.04em] leading-[1.08] mb-3">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extralight text-zinc-950 tracking-[-0.04em] leading-[1.08] mb-3">
             <motion.span
               initial={{ opacity: 0, x: -60 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -60 }}
@@ -89,7 +89,7 @@ export default function ContactSection() {
               initial={{ opacity: 0, x: 60 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 60 }}
               transition={{ duration: 0.65, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
-              className="font-light bg-gradient-to-r from-orange-400 via-amber-300 to-orange-500 bg-clip-text text-transparent block mt-1"
+              className="font-normal bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 bg-clip-text text-transparent block mt-1"
             >
               Let's build together.
             </motion.span>
@@ -109,17 +109,17 @@ export default function ContactSection() {
               duration: 0.55,
               ease: [0.16, 1, 0.3, 1],
             }}
-            className="w-full max-w-2xl rounded-2xl border border-white/20 bg-zinc-950/80 p-6 sm:p-8 backdrop-blur-xl relative overflow-hidden shadow-2xl shadow-orange-950/30"
+            className="w-full max-w-2xl rounded-2xl border border-zinc-200 bg-white/95 p-6 sm:p-8 backdrop-blur-xl relative overflow-hidden shadow-2xl shadow-orange-500/5"
           >
             {/* Ambient card glow */}
-            <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-orange-600/10 blur-[70px] pointer-events-none" />
+            <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-orange-500/10 blur-[70px] pointer-events-none" />
 
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 relative z-10">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                 {/* Full Name */}
                 <div className="space-y-1.5">
-                  <label className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block">
-                    Your Name <span className="text-orange-400">*</span>
+                  <label className="text-[11px] font-mono text-zinc-600 uppercase tracking-wider block">
+                    Your Name <span className="text-orange-600">*</span>
                   </label>
                   <input
                     type="text"
@@ -127,14 +127,14 @@ export default function ContactSection() {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                    
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/80 border border-zinc-800 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-orange-500/70 focus:ring-1 focus:ring-orange-500/50 transition-all font-light"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 border border-zinc-200 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all font-light"
                   />
                 </div>
 
                 {/* Work Email */}
                 <div className="space-y-1.5">
-                  <label className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block">
-                    Work Email <span className="text-orange-400">*</span>
+                  <label className="text-[11px] font-mono text-zinc-600 uppercase tracking-wider block">
+                    Work Email <span className="text-orange-600">*</span>
                   </label>
                   <input
                     type="email"
@@ -142,14 +142,14 @@ export default function ContactSection() {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/80 border border-zinc-800 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-orange-500/70 focus:ring-1 focus:ring-orange-500/50 transition-all font-light"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 border border-zinc-200 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all font-light"
                   />
                 </div>
               </div>
 
               {/* Company / Brand URL */}
               <div className="space-y-1.5">
-                <label className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block">
+                <label className="text-[11px] font-mono text-zinc-600 uppercase tracking-wider block">
                   Company / Brand Website
                 </label>
                 <input
@@ -157,15 +157,13 @@ export default function ContactSection() {
                   value={formData.company}
                   onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                  
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/80 border border-zinc-800 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-orange-500/70 focus:ring-1 focus:ring-orange-500/50 transition-all font-light"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 border border-zinc-200 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all font-light"
                 />
               </div>
 
-              
-
               {/* Project Brief / Goals */}
               <div className="space-y-1.5">
-                <label className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block">
+                <label className="text-[11px] font-mono text-zinc-600 uppercase tracking-wider block">
                   Project Brief & Campaign Goals
                 </label>
                 <textarea
@@ -173,7 +171,7 @@ export default function ContactSection() {
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/80 border border-zinc-800 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-orange-500/70 focus:ring-1 focus:ring-orange-500/50 transition-all font-light resize-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 border border-zinc-200 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all font-light resize-none"
                 />
               </div>
 
@@ -182,7 +180,7 @@ export default function ContactSection() {
                 <button
                   type="submit"
                   disabled={status === 'sending' || status === 'success'}
-                  className="w-full py-3 px-6 rounded-xl font-medium text-xs sm:text-sm tracking-wide text-white bg-gradient-to-r from-orange-600 via-amber-600 to-orange-500 hover:opacity-95 active:scale-[0.99] transition-all flex items-center justify-center gap-2 shadow-lg shadow-orange-900/30 border border-orange-400/30 disabled:opacity-70 disabled:cursor-not-allowed group cursor-pointer"
+                  className="w-full py-3 px-6 rounded-xl font-medium text-xs sm:text-sm tracking-wide text-white bg-gradient-to-r from-orange-600 via-amber-600 to-orange-500 hover:opacity-95 active:scale-[0.99] transition-all flex items-center justify-center gap-2 shadow-lg shadow-orange-500/25 border border-orange-400/30 disabled:opacity-70 disabled:cursor-not-allowed group cursor-pointer"
                 >
                   {status === 'sending' && (
                     <>
@@ -194,14 +192,13 @@ export default function ContactSection() {
                   {status === 'success' && (
                     <>
                       <CheckCircle2 className="w-4 h-4 text-emerald-300" />
-                      <span className="text-emerald-200">Inquiry Transmitted • AI Closer Assigned</span>
+                      <span className="text-emerald-100">Inquiry Transmitted • AI Closer Assigned</span>
                     </>
                   )}
 
                   {status === 'idle' && (
                     <>
                       <span>Submit</span>
-                      
                     </>
                   )}
                 </button>

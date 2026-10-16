@@ -236,18 +236,18 @@ export default function StageDeepDiveSection() {
     <section
       ref={containerRef}
       id="stages-deep-dive"
-      className="relative bg-[#050505] text-zinc-100"
+      className="relative bg-white text-zinc-900"
       style={{ height: '480vh' }}
     >
       {/* ============================================================== */}
       {/* PINNED VIEWPORT: Stays sticky while user scrolls through 7 levels*/}
       {/* ============================================================== */}
-      <div className="sticky top-0 h-screen w-full flex flex-col justify-end pt-0 pb-0 px-4 sm:px-6 lg:px-12 overflow-hidden bg-[#050505] select-none">
+      <div className="sticky top-0 h-screen w-full flex flex-col justify-end pt-0 pb-0 px-4 sm:px-6 lg:px-12 overflow-hidden bg-white select-none">
         
         {/* Background ambient lighting */}
-        <div className="absolute top-1/4 left-1/4 -translate-y-1/2 w-[650px] h-[450px] bg-orange-600/10 blur-[140px] pointer-events-none rounded-full will-change-transform" />
-        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[450px] bg-amber-600/10 blur-[140px] pointer-events-none rounded-full will-change-transform" />
-        <div className="absolute inset-0 bg-grid-pattern [background-size:32px_32px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_50%,#000_70%,transparent_100%)] opacity-15 pointer-events-none" />
+        <div className="absolute top-1/4 left-1/4 -translate-y-1/2 w-[650px] h-[450px] bg-orange-500/10 blur-[150px] pointer-events-none rounded-full will-change-transform" />
+        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[450px] bg-amber-500/10 blur-[150px] pointer-events-none rounded-full will-change-transform" />
+        <div className="absolute inset-0 bg-grid-pattern [background-size:32px_32px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_50%,#000_70%,transparent_100%)] opacity-35 pointer-events-none" />
 
         {/* ============================================================== */}
         {/* MAIN STAGE SHOWCASE: Zero-lag GPU Glide + Side-Screen Heading  */}
@@ -270,7 +270,7 @@ export default function StageDeepDiveSection() {
               className="absolute bottom-0 left-0 w-full lg:w-1/2 h-full flex items-end justify-center pointer-events-none pb-0 mb-0 z-10 will-change-transform"
             >
               {/* Concentric Neon Halo */}
-              <div className="absolute w-[450px] h-[450px] sm:w-[580px] sm:h-[580px] rounded-full bg-gradient-to-tr from-orange-600/25 via-amber-600/15 to-orange-500/20 blur-[110px] pointer-events-none -bottom-10" />
+              <div className="absolute w-[450px] h-[450px] sm:w-[580px] sm:h-[580px] rounded-full bg-gradient-to-tr from-orange-500/20 via-amber-400/15 to-orange-400/20 blur-[100px] pointer-events-none -bottom-10" />
 
               {/* Agent Figure: Perfectly scaled, full helmet visible, 0 bottom gap */}
               <motion.div
@@ -287,7 +287,7 @@ export default function StageDeepDiveSection() {
                   src="/images/orenge-1.webp"
                   alt={`Autonomous Agent - Stage ${currentStage.number}`}
                   style={{ height: '78vh', maxHeight: '760px' }}
-                  className="w-auto object-contain object-bottom select-none block drop-shadow-[0_20px_60px_rgba(249,115,22,0.45)] pointer-events-none pb-0 mb-0 align-bottom"
+                  className="w-auto object-contain object-bottom select-none block drop-shadow-[0_20px_50px_rgba(249,115,22,0.3)] pointer-events-none pb-0 mb-0 align-bottom"
                 />
               </motion.div>
             </motion.div>
@@ -329,7 +329,7 @@ export default function StageDeepDiveSection() {
                         duration: 0.65,
                         ease: [0.16, 1, 0.3, 1],
                       }}
-                      className={`text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extralight text-white tracking-[-0.03em] leading-[1.12] ${
+                      className={`text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extralight text-zinc-950 tracking-[-0.03em] leading-[1.12] ${
                         isImageOnLeft ? 'text-right' : 'text-left'
                       }`}
                     >
@@ -346,7 +346,7 @@ export default function StageDeepDiveSection() {
                         delay: 0.08,
                         ease: [0.16, 1, 0.3, 1],
                       }}
-                      className={`text-sm sm:text-base lg:text-lg text-zinc-300 font-light leading-relaxed max-w-2xl ${
+                      className={`text-sm sm:text-base lg:text-lg text-zinc-600 font-light leading-relaxed max-w-2xl ${
                         isImageOnLeft ? 'text-right' : 'text-left'
                       }`}
                     >
@@ -376,12 +376,12 @@ export default function StageDeepDiveSection() {
                               : 'flex-row text-left'
                           }`}
                         >
-                          <div className="w-1.5 h-1.5 rounded-full bg-orange-400 mt-2 shrink-0 shadow-[0_0_8px_rgba(249,115,22,0.85)]" />
+                          <div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-2 shrink-0 shadow-[0_0_8px_rgba(249,115,22,0.7)]" />
                           <div className={isImageOnLeft ? 'text-right' : 'text-left'}>
-                            <span className="text-xs sm:text-sm font-medium text-white tracking-wide">
+                            <span className="text-xs sm:text-sm font-semibold text-zinc-900 tracking-wide">
                               {pt.label}:{' '}
                             </span>
-                            <span className="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
+                            <span className="text-xs sm:text-sm text-zinc-500 font-light leading-relaxed">
                               {pt.detail}
                             </span>
                           </div>
@@ -397,7 +397,7 @@ export default function StageDeepDiveSection() {
         </div>
 
         {/* Minimalist Stage Indicator Dots */}
-        <div className="relative z-20 max-w-[1680px] mx-auto w-full flex items-center justify-between pb-4 border-t border-zinc-800/40 text-xs font-mono text-zinc-500">
+        <div className="relative z-20 max-w-[1680px] mx-auto w-full flex items-center justify-between pb-4 border-t border-zinc-200 text-xs font-mono text-zinc-500">
           <div className="flex items-center gap-2">
             {STAGES.map((s, idx) => {
               const isActive = idx === activeStage;
@@ -407,8 +407,8 @@ export default function StageDeepDiveSection() {
                   onClick={() => handleStageClick(idx)}
                   className={`transition-all duration-300 cursor-pointer ${
                     isActive
-                      ? 'w-8 h-1.5 rounded-full bg-gradient-to-r from-orange-500 to-amber-400 shadow-[0_0_10px_rgba(249,115,22,0.7)]'
-                      : 'w-2 h-1.5 rounded-full bg-zinc-800 hover:bg-zinc-600'
+                      ? 'w-8 h-1.5 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 shadow-[0_0_10px_rgba(249,115,22,0.5)]'
+                      : 'w-2 h-1.5 rounded-full bg-zinc-200 hover:bg-zinc-400'
                   }`}
                   aria-label={`Jump to Stage ${s.number}`}
                 />
@@ -416,7 +416,7 @@ export default function StageDeepDiveSection() {
             })}
           </div>
           <span className="text-zinc-500 font-mono text-xs">
-            LEVEL <span className="text-white font-semibold">{currentStage.number}</span> / 07
+            LEVEL <span className="text-zinc-950 font-bold">{currentStage.number}</span> / 07
           </span>
         </div>
 

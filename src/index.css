@@ -4,13 +4,13 @@
 
 @layer base {
   :root {
-    --color-bg-primary: #050505;
-    --color-bg-secondary: #09090b;
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #fafafa;
   }
 
   body {
-    background-color: #050505;
-    color: #f4f4f5;
+    background-color: #ffffff;
+    color: #09090b;
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
   }
@@ -26,46 +26,46 @@
     height: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #09090b;
+    background: #f4f4f5;
   }
   ::-webkit-scrollbar-thumb {
-    background: #27272a;
+    background: #d4d4d8;
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #3f3f46;
+    background: #a1a1aa;
   }
 }
 
 @layer utilities {
   .text-glow-orange {
-    text-shadow: 0 0 20px rgba(249, 115, 22, 0.65), 0 0 40px rgba(249, 115, 22, 0.25);
+    text-shadow: 0 0 20px rgba(249, 115, 22, 0.4), 0 0 40px rgba(249, 115, 22, 0.15);
   }
   .box-glow-orange {
-    box-shadow: 0 0 35px -5px rgba(249, 115, 22, 0.4);
+    box-shadow: 0 0 35px -5px rgba(249, 115, 22, 0.25);
   }
   .text-glow-purple {
-    text-shadow: 0 0 20px rgba(249, 115, 22, 0.6), 0 0 40px rgba(249, 115, 22, 0.2);
+    text-shadow: 0 0 20px rgba(249, 115, 22, 0.35), 0 0 40px rgba(249, 115, 22, 0.15);
   }
   .text-glow-cyan {
-    text-shadow: 0 0 20px rgba(245, 158, 11, 0.6), 0 0 40px rgba(245, 158, 11, 0.2);
+    text-shadow: 0 0 20px rgba(245, 158, 11, 0.35), 0 0 40px rgba(245, 158, 11, 0.15);
   }
   .box-glow-purple {
-    box-shadow: 0 0 30px -5px rgba(249, 115, 22, 0.35);
+    box-shadow: 0 0 30px -5px rgba(249, 115, 22, 0.2);
   }
   .box-glow-cyan {
-    box-shadow: 0 0 30px -5px rgba(245, 158, 11, 0.35);
+    box-shadow: 0 0 30px -5px rgba(245, 158, 11, 0.2);
   }
   .box-glow-emerald {
-    box-shadow: 0 0 30px -5px rgba(16, 185, 129, 0.35);
+    box-shadow: 0 0 30px -5px rgba(16, 185, 129, 0.2);
   }
   .bg-glass {
-    background: rgba(18, 18, 22, 0.65);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
   }
   .border-glass {
-    border-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(0, 0, 0, 0.08);
   }
 }
 
@@ -164,15 +164,10 @@
 
 .crt-overlay {
   background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.45) 50%
-  ), linear-gradient(
-    90deg,
-    rgba(255, 0, 0, 0.04),
-    rgba(0, 255, 0, 0.02),
-    rgba(0, 0, 255, 0.04)
+    rgba(255, 255, 255, 0) 50%, 
+    rgba(0, 0, 0, 0.01) 50%
   );
-  background-size: 100% 3px, 6px 100%;
+  background-size: 100% 3px;
 }
 
 @keyframes cyber-grid-drift {
@@ -186,8 +181,8 @@
 
 .cyber-grid-plane {
   background-image: 
-    linear-gradient(to right, rgba(249, 115, 22, 0.15) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(245, 158, 11, 0.15) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
   background-size: 40px 40px;
   animation: cyber-grid-drift 3s linear infinite;
 }

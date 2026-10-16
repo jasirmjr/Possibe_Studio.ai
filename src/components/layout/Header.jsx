@@ -27,18 +27,16 @@ export default function Header() {
       <div
         className={`max-w-7xl mx-auto rounded-full transition-all duration-300 ${
           scrolled
-            ? 'bg-zinc-950/80 backdrop-blur-xl border border-zinc-800/90 shadow-2xl shadow-orange-950/20 py-2.5 px-4 sm:px-6'
-            : 'bg-zinc-950/40 backdrop-blur-md border border-zinc-800/40 py-3.5 px-5 sm:px-7'
+            ? 'bg-white/85 backdrop-blur-xl border border-zinc-200/90 shadow-xl shadow-zinc-950/5 py-2.5 px-4 sm:px-6'
+            : 'bg-white/65 backdrop-blur-md border border-zinc-200/60 shadow-md shadow-zinc-950/5 py-3.5 px-5 sm:px-7'
         }`}
       >
         <div className="flex items-center justify-between">
           {/* Brand Logo */}
           <a href="#" className="flex items-center gap-3 group">
-           
             <div className="flex flex-col">
-              <span className="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-1.5">
-                possible<span className="bg-gradient-to-r from-orange-400 via-amber-400 to-orange-500 bg-clip-text text-transparent">studio.ai</span>
-               
+              <span className="text-base sm:text-lg font-bold tracking-tight text-zinc-950 flex items-center gap-1.5">
+                possible<span className="bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 bg-clip-text text-transparent">studio.ai</span>
               </span>
             </div>
           </a>
@@ -49,7 +47,7 @@ export default function Header() {
               <a
                 key={link.name}
                 href={link.href}
-                className="px-3.5 py-1.5 text-xs lg:text-sm font-medium text-zinc-400 hover:text-white rounded-full hover:bg-zinc-800/40 transition-colors duration-200"
+                className="px-3.5 py-1.5 text-xs lg:text-sm font-medium text-zinc-600 hover:text-orange-600 rounded-full hover:bg-orange-50/70 transition-colors duration-200"
               >
                 {link.name}
               </a>
@@ -58,8 +56,6 @@ export default function Header() {
 
           {/* Right Action & Live Agent Pill */}
           <div className="hidden sm:flex items-center gap-3">
-            
-
             <Button
               variant="primary"
               size="sm"
@@ -87,7 +83,7 @@ export default function Header() {
             </Button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-zinc-400 hover:text-white bg-zinc-900/60 border border-zinc-800"
+              className="p-2 rounded-lg text-zinc-700 hover:text-orange-600 bg-white border border-zinc-200 shadow-sm"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -104,13 +100,13 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="sm:hidden mt-2 mx-auto max-w-7xl rounded-2xl bg-zinc-950/95 border border-zinc-800 backdrop-blur-2xl p-5 shadow-2xl shadow-purple-950/40"
+            className="sm:hidden mt-2 mx-auto max-w-7xl rounded-2xl bg-white/95 border border-zinc-200 backdrop-blur-2xl p-5 shadow-2xl"
           >
             <div className="flex flex-col gap-3">
-              <div className="flex items-center justify-between pb-3 border-b border-zinc-800/80">
-                <span className="text-xs font-mono text-zinc-400">Autonomous Core</span>
-                <span className="flex items-center gap-1.5 text-xs font-mono text-emerald-400">
-                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
+                <span className="text-xs font-mono text-zinc-500">Autonomous Core</span>
+                <span className="flex items-center gap-1.5 text-xs font-mono text-emerald-600">
+                  <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
                   Agent Online
                 </span>
               </div>
@@ -119,7 +115,7 @@ export default function Header() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2 text-sm font-medium text-zinc-300 hover:text-white hover:bg-zinc-900 rounded-lg transition-colors"
+                  className="px-3 py-2 text-sm font-medium text-zinc-700 hover:text-orange-600 hover:bg-orange-50/80 rounded-lg transition-colors"
                 >
                   {link.name}
                 </a>

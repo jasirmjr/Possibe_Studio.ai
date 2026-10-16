@@ -150,32 +150,24 @@ export default function HeroSection() {
   const heroImageSrc = '/images/orenge-1.webp';
 
   return (
-    <section className="relative min-h-[96vh] lg:h-screen flex flex-col justify-between pt-16 lg:pt-20 pb-0 overflow-hidden bg-[#050505] select-none">
+    <section className="relative min-h-[96vh] lg:h-screen flex flex-col justify-between pt-16 lg:pt-20 pb-0 overflow-hidden bg-white select-none">
       
       {/* ============================================================== */}
-      {/* 1. CRT SCANLINE & VIGNETTE OVERLAYS (ORANGE CYBER AESTHETIC)   */}
+      {/* 1. CRT SCANLINE OVERLAY (ORANGE & WHITE THEME)                 */}
       {/* ============================================================== */}
-      <div className="absolute inset-0 crt-overlay pointer-events-none z-30 opacity-70" />
+      <div className="absolute inset-0 crt-overlay pointer-events-none z-30 opacity-40" />
       
-      {/* Continuous horizontal scanline drift bar with warm orange/amber tint */}
+      {/* Continuous horizontal scanline drift bar with subtle neutral tint */}
       <motion.div
-        className="absolute inset-x-0 h-28 bg-gradient-to-b from-transparent via-orange-500/[0.06] to-transparent pointer-events-none z-30"
+        className="absolute inset-x-0 h-28 bg-gradient-to-b from-transparent via-zinc-400/[0.015] to-transparent pointer-events-none z-30"
         animate={{ y: ['-100%', '1100%'] }}
         transition={{ repeat: Infinity, duration: 5, ease: 'linear' }}
       />
 
-      {/* Screen edge vignette */}
-      <div className="absolute inset-0 pointer-events-none z-30 shadow-[inset_0_0_140px_rgba(0,0,0,0.92)]" />
-
-      {/* Ambient Radial Glows (Warm Cyberpunk Orange & Amber) */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] lg:w-[950px] lg:h-[850px] bg-orange-600/22 blur-[190px] pointer-events-none rounded-full" />
-      <div className="absolute top-1/3 left-1/4 w-[450px] h-[450px] bg-amber-500/18 blur-[160px] pointer-events-none rounded-full" />
-      <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] bg-red-600/12 blur-[170px] pointer-events-none rounded-full" />
-
       {/* ============================================================== */}
       {/* 2. 3D CYBER WIREFRAME MESH PERSPECTIVE FLOOR                   */}
       {/* ============================================================== */}
-      <div className="absolute inset-x-0 bottom-0 h-[45vh] pointer-events-none z-0 overflow-hidden opacity-35">
+      <div className="absolute inset-x-0 bottom-0 h-[45vh] pointer-events-none z-0 overflow-hidden opacity-40">
         <div
           className="cyber-grid-plane absolute -inset-x-[50%] bottom-0 h-[200%] origin-bottom"
           style={{
@@ -183,7 +175,7 @@ export default function HeroSection() {
           }}
         />
         {/* Floor fade gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white" />
       </div>
 
       {/* ============================================================== */}
@@ -196,7 +188,7 @@ export default function HeroSection() {
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 22, ease: 'linear' }}
-            className="absolute inset-0 rounded-full border border-dashed border-orange-500/40"
+            className="absolute inset-0 rounded-full border border-dashed border-orange-500/35"
           />
 
           {/* Layer 2: Second concentric ring continuously rotating counter-clockwise & gently breathing (Amber) */}
@@ -209,7 +201,7 @@ export default function HeroSection() {
               rotate: { repeat: Infinity, duration: 15, ease: 'linear' },
               scale: { repeat: Infinity, duration: 4, ease: 'easeInOut' },
             }}
-            className="absolute inset-4 rounded-full border border-amber-500/40 border-t-orange-400"
+            className="absolute inset-4 rounded-full border border-amber-500/35 border-t-orange-500"
           />
 
         </div>
@@ -221,24 +213,24 @@ export default function HeroSection() {
       <div className="absolute inset-4 sm:inset-6 lg:inset-8 pointer-events-none z-25 flex flex-col justify-between">
         
         {/* Top bar with quick glitch trigger and rotating pipeline compass */}
-        <div className="flex items-start justify-between w-full pt-12 sm:pt-14 lg:pt-8 text-[10px] sm:text-xs font-mono text-zinc-400 tracking-wider">
+        <div className="flex items-start justify-between w-full pt-12 sm:pt-14 lg:pt-8 text-[10px] sm:text-xs font-mono text-zinc-600 tracking-wider">
           
-          {/* Top Left: Sleek Contact & Glitch Trigger Pill (Rec effect removed) */}
+          {/* Top Left: Sleek Contact & Glitch Trigger Pill */}
           <div className="flex items-center space-x-2 pointer-events-auto">
             <button
               onClick={() => {
                 const el = document.getElementById('contact');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-3.5 py-1.5 rounded-lg bg-zinc-900/80 hover:bg-orange-950/50 border border-orange-500/40 hover:border-orange-400 text-orange-300 text-xs font-mono flex items-center space-x-1.5 transition-all backdrop-blur-md cursor-pointer shadow-lg shadow-orange-950/30"
+              className="px-3.5 py-1.5 rounded-lg bg-white/90 hover:bg-orange-50 border border-zinc-200 hover:border-orange-400 text-zinc-800 hover:text-orange-600 text-xs font-mono flex items-center space-x-1.5 transition-all backdrop-blur-md cursor-pointer shadow-sm"
             >
               <span>Contact</span>
-              <ArrowRight className="w-3.5 h-3.5 text-orange-400" />
+              <ArrowRight className="w-3.5 h-3.5 text-orange-500" />
             </button>
 
             <button
               onClick={triggerManualGlitch}
-              className="p-1.5 rounded-lg bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-700/60 hover:border-orange-500/60 text-orange-400 transition-all backdrop-blur-md cursor-pointer"
+              className="p-1.5 rounded-lg bg-white/90 hover:bg-orange-50 border border-zinc-200 hover:border-orange-400 text-orange-500 transition-all backdrop-blur-md cursor-pointer shadow-sm"
               title="Trigger glitch fracture"
             >
               <Zap className="w-4 h-4" />
@@ -247,9 +239,9 @@ export default function HeroSection() {
 
           {/* Top Right: Rotating compass widget with navigation */}
           <div className="flex items-center space-x-3 pointer-events-auto">
-            <div className="hidden sm:flex flex-col text-right text-[9px] sm:text-[10px] text-zinc-400 space-y-0.5">
-              <span className="text-orange-400 font-semibold">NEURAL LINK: 99.8%</span>
-              <span className="text-amber-400">STATUS: OPTIMAL</span>
+            <div className="hidden sm:flex flex-col text-right text-[9px] sm:text-[10px] text-zinc-500 space-y-0.5">
+              <span className="text-orange-600 font-semibold">NEURAL LINK: 99.8%</span>
+              <span className="text-amber-600">STATUS: OPTIMAL</span>
             </div>
 
             {/* Circular Rotating Radar Widget (Orange Theme) */}
@@ -267,7 +259,7 @@ export default function HeroSection() {
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 16, ease: 'linear' }}
-                className="absolute inset-0 rounded-full border border-dashed border-orange-500/50 group-hover:border-orange-400"
+                className="absolute inset-0 rounded-full border border-dashed border-orange-500/50 group-hover:border-orange-500"
               />
               {/* Inner counter-rotating ring with scale pulsation */}
               <motion.div
@@ -279,14 +271,14 @@ export default function HeroSection() {
                   rotate: { repeat: Infinity, duration: 10, ease: 'linear' },
                   scale: { repeat: Infinity, duration: 3, ease: 'easeInOut' },
                 }}
-                className="absolute inset-1.5 rounded-full border border-amber-500/50 border-t-orange-400 group-hover:border-amber-400"
+                className="absolute inset-1.5 rounded-full border border-amber-500/50 border-t-orange-500 group-hover:border-amber-500"
               />
               {/* Center badge */}
-              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-zinc-950/85 border border-white/20 flex flex-col items-center justify-center text-center backdrop-blur-md group-hover:bg-orange-950/60 transition-colors">
-                <span className="text-[7px] sm:text-[8px] font-mono uppercase tracking-tighter text-zinc-300 font-bold leading-none">
+              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white border border-zinc-200 flex flex-col items-center justify-center text-center backdrop-blur-md group-hover:bg-orange-50 transition-colors shadow-sm">
+                <span className="text-[7px] sm:text-[8px] font-mono uppercase tracking-tighter text-zinc-700 font-bold leading-none">
                   PIPELINE
                 </span>
-                <span className="text-[10px] sm:text-xs text-orange-400 mt-0.5 font-bold">↗</span>
+                <span className="text-[10px] sm:text-xs text-orange-500 mt-0.5 font-bold">↗</span>
               </div>
             </motion.div>
           </div>
@@ -294,16 +286,16 @@ export default function HeroSection() {
 
         {/* Viewfinder brackets & crosshairs (Orange / Amber accents) */}
         <div className="relative w-full h-full pointer-events-none">
-          <div className="absolute top-2 left-0 w-7 h-7 border-t-2 border-l-2 border-orange-500/50" />
-          <div className="absolute top-2 right-0 w-7 h-7 border-t-2 border-r-2 border-orange-500/50" />
-          <div className="absolute bottom-6 left-0 w-7 h-7 border-b-2 border-l-2 border-orange-500/50" />
-          <div className="absolute bottom-6 right-0 w-7 h-7 border-b-2 border-r-2 border-orange-500/50" />
+          <div className="absolute top-2 left-0 w-7 h-7 border-t-2 border-l-2 border-orange-500/40" />
+          <div className="absolute top-2 right-0 w-7 h-7 border-t-2 border-r-2 border-orange-500/40" />
+          <div className="absolute bottom-6 left-0 w-7 h-7 border-b-2 border-l-2 border-orange-500/40" />
+          <div className="absolute bottom-6 right-0 w-7 h-7 border-b-2 border-r-2 border-orange-500/40" />
 
           {/* Crosshairs (+) */}
-          <span className="absolute top-1/4 left-1/4 text-zinc-600 font-mono text-sm select-none">+</span>
-          <span className="absolute top-1/4 right-1/4 text-zinc-600 font-mono text-sm select-none">+</span>
-          <span className="absolute bottom-1/3 left-1/3 text-zinc-600 font-mono text-sm select-none">+</span>
-          <span className="absolute bottom-1/3 right-1/3 text-zinc-600 font-mono text-sm select-none">+</span>
+          <span className="absolute top-1/4 left-1/4 text-zinc-300 font-mono text-sm select-none">+</span>
+          <span className="absolute top-1/4 right-1/4 text-zinc-300 font-mono text-sm select-none">+</span>
+          <span className="absolute bottom-1/3 left-1/3 text-zinc-300 font-mono text-sm select-none">+</span>
+          <span className="absolute bottom-1/3 right-1/3 text-zinc-300 font-mono text-sm select-none">+</span>
         </div>
       </div>
 
@@ -323,7 +315,7 @@ export default function HeroSection() {
               e.currentTarget.src = '/images/orenge-1.png';
             }}
             alt="Possiblestudio.ai autonomous executive robot - orange edition"
-            className={`w-auto h-full object-contain object-bottom select-none block drop-shadow-[0_20px_90px_rgba(249,115,22,0.45)] group-hover:drop-shadow-[0_30px_110px_rgba(249,115,22,0.7)] transition-all duration-200 ${
+            className={`w-auto h-full object-contain object-bottom select-none block drop-shadow-[0_20px_50px_rgba(0,0,0,0.06)] group-hover:drop-shadow-[0_25px_60px_rgba(0,0,0,0.1)] transition-all duration-200 ${
               isGlitching ? 'opacity-0' : 'opacity-100'
             }`}
           />
@@ -414,26 +406,26 @@ export default function HeroSection() {
         
         <div className="flex flex-col items-center justify-center text-center w-full pb-2 z-20 pointer-events-auto">
           
-          {/* Letter Revealing Heading Line 1 (Restored bold font, centered) */}
+          {/* Letter Revealing Heading Line 1 (Dark high-contrast on white) */}
           <div className="overflow-hidden leading-[0.85] w-full flex justify-center">
             <LetterRevealHeading
               text={title1}
               isGlitching={isGlitching}
-              className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-heading font-black tracking-tighter uppercase text-white drop-shadow-[0_4px_30px_rgba(0,0,0,0.9)]"
+              className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-heading font-black tracking-tighter uppercase text-zinc-950"
               textShadow={
                 isGlitching
                   ? '-4px 0px 0px #ff6b00, 4px 0px 0px #f59e0b'
-                  : '0 0 25px rgba(249, 115, 22, 0.45)'
+                  : 'none'
               }
             />
           </div>
 
-          {/* Letter Revealing Heading Line 2 (Restored bold font, centered) */}
+          {/* Letter Revealing Heading Line 2 (Vibrant orange/amber gradient) */}
           <div className="overflow-hidden leading-[0.85] mt-1 sm:mt-2 w-full flex justify-center">
             <LetterRevealHeading
               text={title2}
               isGlitching={isGlitching}
-              className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-black tracking-tighter uppercase bg-gradient-to-r from-orange-400 via-amber-300 to-orange-500 bg-clip-text text-transparent drop-shadow-[0_4px_30px_rgba(0,0,0,0.9)]"
+              className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-black tracking-tighter uppercase bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 bg-clip-text text-transparent"
               textShadow={
                 isGlitching
                   ? '-3px 0px 0px #ff6b00, 3px 0px 0px #f59e0b'
@@ -443,41 +435,41 @@ export default function HeroSection() {
           </div>
 
           {/* Clean Sub-telemetry line (No background box) */}
-          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 mt-3.5 text-[10px] sm:text-xs font-mono text-zinc-400 tracking-wider">
-            <span className="text-orange-400 font-light">SIGNAL: FRACTURED & JOINED</span>
-            <span className="text-zinc-600">•</span>
-            <span className="text-zinc-400 font-light">ENCRYPTION: QUANTUM 512</span>
-            <span className="text-zinc-600">•</span>
-            <span className="text-amber-400 font-light">VERSION 4.8.2</span>
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 mt-3.5 text-[10px] sm:text-xs font-mono text-zinc-500 tracking-wider">
+            <span className="text-orange-600 font-medium">SIGNAL: FRACTURED & JOINED</span>
+            <span className="text-zinc-300">•</span>
+            <span className="text-zinc-600 font-light">ENCRYPTION: QUANTUM 512</span>
+            <span className="text-zinc-300">•</span>
+            <span className="text-amber-600 font-medium">VERSION 4.8.2</span>
           </div>
         </div>
       </div>
 
       {/* ============================================================== */}
-      {/* 7. BOTTOM GRADIENT VIGNETTE                                    */}
+      {/* 7. BOTTOM GRADIENT VIGNETTE (SEAMLESS WHITE BLEND)             */}
       {/* ============================================================== */}
-      <div className="absolute bottom-0 inset-x-0 h-28 sm:h-36 lg:h-44 bg-gradient-to-t from-[#050505] via-[#050505]/85 to-transparent pointer-events-none z-20" />
+      <div className="absolute bottom-0 inset-x-0 h-24 sm:h-32 lg:h-40 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-20" />
 
       {/* Video Demo Modal */}
       <AnimatePresence>
         {demoActive && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-md">
             <motion.div
               initial={{ opacity: 0, scale: 0.92 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.92 }}
               transition={{ duration: 0.2 }}
-              className="relative w-full max-w-3xl rounded-2xl bg-zinc-950 border border-orange-500/50 p-6 shadow-2xl"
+              className="relative w-full max-w-3xl rounded-2xl bg-white border border-orange-400/50 p-6 shadow-2xl text-zinc-900"
             >
               <button
                 onClick={() => setDemoActive(false)}
-                className="absolute top-4 right-4 text-zinc-400 hover:text-white px-3 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-sm font-mono cursor-pointer"
+                className="absolute top-4 right-4 text-zinc-600 hover:text-zinc-900 px-3 py-1 rounded-lg bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 text-sm font-mono cursor-pointer"
               >
                 Close [ESC]
               </button>
               <div className="flex items-center gap-3 mb-4">
-                <Bot className="w-5 h-5 text-orange-400" />
-                <h3 className="text-lg font-bold text-white">Autonomous Agent In Action</h3>
+                <Bot className="w-5 h-5 text-orange-500" />
+                <h3 className="text-lg font-bold text-zinc-950">Autonomous Agent In Action</h3>
               </div>
               <div className="aspect-video w-full rounded-xl bg-zinc-900/80 border border-zinc-800 flex flex-col items-center justify-center p-6 text-center">
                 <div className="w-16 h-16 rounded-full bg-orange-600/20 border border-orange-500 flex items-center justify-center mb-4">

@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
-import CapabilitiesWorkflowSection from './CapabilitiesWorkflowSection';
 
 // ============================================================================
 // 7 HIGH-DEFINITION VECTOR ILLUSTRATIONS (CLEAR & RECOGNIZABLE)
@@ -748,9 +747,8 @@ export default function WorkflowSteps() {
     setScrollProgress(latest);
   });
 
-  // Allocate first ~50% of the scroll track to the 6 level wipe transitions.
-  // Stage 07 settles static, and Section 3 slides in from the left side directly over Section 2!
-  const TRANSITION_FRACTION = 0.50;
+  // Allocate 95% of the scroll track to the 6 level wipe transitions, holding on Stage 07.
+  const TRANSITION_FRACTION = 0.95;
   const transitionProgress = Math.min(1, scrollProgress / TRANSITION_FRACTION);
   const isFinalStatic = transitionProgress >= 1;
 
@@ -783,19 +781,17 @@ export default function WorkflowSteps() {
     <section
       ref={containerRef}
       id="workflow"
-      className="relative z-10 bg-[#050505] text-zinc-100 select-none"
-      style={{ height: '500vh' }}
+      className="relative z-10 bg-white text-zinc-900 select-none"
+      style={{ height: '380vh' }}
     >
-      {/* Anchor for Section 3 Capabilities nav link */}
-      <div id="capabilities" className="absolute top-[52%] pointer-events-none" />
       {/* ============================================================== */}
       {/* PINNED VIEWPORT: Stays sticky across the 6 transition intervals */}
       {/* ============================================================== */}
-      <div className="sticky top-0 h-screen w-full flex flex-col justify-between overflow-hidden bg-[#050505]">
+      <div className="sticky top-0 h-screen w-full flex flex-col justify-between overflow-hidden bg-white">
         
         {/* Subtle Ambient Radial Lighting */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[750px] bg-orange-600/10 blur-[190px] pointer-events-none rounded-full" />
-        <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-amber-500/10 blur-[160px] pointer-events-none rounded-full" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[750px] bg-orange-500/8 blur-[190px] pointer-events-none rounded-full" />
+        <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-amber-500/6 blur-[160px] pointer-events-none rounded-full" />
 
         {/* ============================================================== */}
         {/* DUAL-LAYER SCANNER WIPE ENGINE:                                */}
@@ -816,10 +812,10 @@ export default function WorkflowSteps() {
           >
             {/* Top-Left: Headings */}
             <div className="max-w-xl z-10 text-left pt-6 sm:pt-4">
-              <span className="font-mono text-xs sm:text-sm text-orange-400 font-bold tracking-widest block mb-2 uppercase">
+              <span className="font-mono text-xs sm:text-sm text-orange-600 font-bold tracking-widest block mb-2 uppercase">
                 {currentStage.number}
               </span>
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-light text-white tracking-tight leading-[1.08]">
+              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-light text-zinc-950 tracking-tight leading-[1.08]">
                 {currentStage.title}
               </h2>
             </div>
@@ -830,7 +826,7 @@ export default function WorkflowSteps() {
                 className="relative w-[360px] h-[360px] sm:w-[460px] sm:h-[460px] lg:w-[520px] lg:h-[520px] flex items-center justify-center"
                 style={{
                   backgroundImage:
-                    'linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px)',
+                    'linear-gradient(to right, rgba(249, 115, 22, 0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(249, 115, 22, 0.12) 1px, transparent 1px)',
                   backgroundSize: '28px 28px',
                   maskImage: 'radial-gradient(circle at center, black 45%, transparent 95%)',
                   WebkitMaskImage: 'radial-gradient(circle at center, black 45%, transparent 95%)',
@@ -842,7 +838,7 @@ export default function WorkflowSteps() {
 
             {/* Bottom-Right: Narrative Description */}
             <div className="flex justify-end w-full z-10 pb-8 sm:pb-6">
-              <p className="text-sm sm:text-base text-zinc-400 font-light max-w-sm sm:max-w-md leading-relaxed text-right">
+              <p className="text-sm sm:text-base text-zinc-600 font-light max-w-sm sm:max-w-md leading-relaxed text-right">
                 {currentStage.desc}
               </p>
             </div>
@@ -859,10 +855,10 @@ export default function WorkflowSteps() {
           >
             {/* Top-Left: Next Headings */}
             <div className="max-w-xl z-10 text-left pt-6 sm:pt-4">
-              <span className="font-mono text-xs sm:text-sm text-orange-400 font-bold tracking-widest block mb-2 uppercase">
+              <span className="font-mono text-xs sm:text-sm text-orange-600 font-bold tracking-widest block mb-2 uppercase">
                 {nextStage.number}
               </span>
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-light text-white tracking-tight leading-[1.08]">
+              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-light text-zinc-950 tracking-tight leading-[1.08]">
                 {nextStage.title}
               </h2>
             </div>
@@ -873,7 +869,7 @@ export default function WorkflowSteps() {
                 className="relative w-[360px] h-[360px] sm:w-[460px] sm:h-[460px] lg:w-[520px] lg:h-[520px] flex items-center justify-center"
                 style={{
                   backgroundImage:
-                    'linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px)',
+                    'linear-gradient(to right, rgba(249, 115, 22, 0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(249, 115, 22, 0.12) 1px, transparent 1px)',
                   backgroundSize: '28px 28px',
                   maskImage: 'radial-gradient(circle at center, black 45%, transparent 95%)',
                   WebkitMaskImage: 'radial-gradient(circle at center, black 45%, transparent 95%)',
@@ -885,7 +881,7 @@ export default function WorkflowSteps() {
 
             {/* Bottom-Right: Next Description */}
             <div className="flex justify-end w-full z-10 pb-8 sm:pb-6">
-              <p className="text-sm sm:text-base text-zinc-400 font-light max-w-sm sm:max-w-md leading-relaxed text-right">
+              <p className="text-sm sm:text-base text-zinc-600 font-light max-w-sm sm:max-w-md leading-relaxed text-right">
                 {nextStage.desc}
               </p>
             </div>
@@ -905,14 +901,7 @@ export default function WorkflowSteps() {
             {/* The horizontal cross line with orange neon glow */}
             <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-orange-500 to-transparent shadow-[0_0_12px_#ff6b00]" />
           </div>
-
         </div>
-
-        {/* ============================================================== */}
-        {/* SECTION 3: SLIDES IN FROM THE LEFT OVER STATIC SECTION 2       */}
-        {/* ============================================================== */}
-        <CapabilitiesWorkflowSection scrollYProgress={scrollYProgress} />
-
       </div>
     </section>
   );

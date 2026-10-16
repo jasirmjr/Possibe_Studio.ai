@@ -9,10 +9,10 @@ export default {
     extend: {
       colors: {
         background: {
-          DEFAULT: '#050505',
-          secondary: '#09090b',
-          tertiary: '#121216',
-          card: 'rgba(18, 18, 22, 0.65)',
+          DEFAULT: '#ffffff',
+          secondary: '#fafafa',
+          tertiary: '#f4f4f5',
+          card: 'rgba(255, 255, 255, 0.85)',
         },
         neon: {
           orange: '#ff6b00',
@@ -36,10 +36,10 @@ export default {
       },
       backgroundImage: {
         'radial-gradient': 'radial-gradient(ellipse at center, var(--tw-gradient-stops))',
-        'grid-pattern': "radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px)",
-        'glow-orange': 'radial-gradient(circle, rgba(255, 107, 0, 0.18) 0%, transparent 70%)',
-        'glow-purple': 'radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%)',
-        'glow-cyan': 'radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%)',
+        'grid-pattern': "radial-gradient(rgba(249, 115, 22, 0.12) 1px, transparent 1px)",
+        'glow-orange': 'radial-gradient(circle, rgba(255, 107, 0, 0.12) 0%, transparent 70%)',
+        'glow-purple': 'radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%)',
+        'glow-cyan': 'radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 70%)',
       },
       animation: {
         'float-slow': 'float 6s ease-in-out infinite',
