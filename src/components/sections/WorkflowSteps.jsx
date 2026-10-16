@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import CapabilitiesWorkflowSection from './CapabilitiesWorkflowSection';
 
 // ============================================================================
 // 7 HIGH-DEFINITION VECTOR ILLUSTRATIONS (CLEAR & RECOGNIZABLE)
@@ -747,9 +748,9 @@ export default function WorkflowSteps() {
     setScrollProgress(latest);
   });
 
-  // Allocate first ~68% of the scroll track to the 6 level wipe transitions.
-  // The remaining ~32% keeps Level 07 completely STATIC while Section 3 slides over it from the bottom.
-  const TRANSITION_FRACTION = 0.68;
+  // Allocate first ~50% of the scroll track to the 6 level wipe transitions.
+  // Stage 07 settles static, and Section 3 slides in from the left side directly over Section 2!
+  const TRANSITION_FRACTION = 0.50;
   const transitionProgress = Math.min(1, scrollProgress / TRANSITION_FRACTION);
   const isFinalStatic = transitionProgress >= 1;
 
@@ -783,8 +784,10 @@ export default function WorkflowSteps() {
       ref={containerRef}
       id="workflow"
       className="relative z-10 bg-[#050505] text-zinc-100 select-none"
-      style={{ height: '520vh' }}
+      style={{ height: '500vh' }}
     >
+      {/* Anchor for Section 3 Capabilities nav link */}
+      <div id="capabilities" className="absolute top-[52%] pointer-events-none" />
       {/* ============================================================== */}
       {/* PINNED VIEWPORT: Stays sticky across the 6 transition intervals */}
       {/* ============================================================== */}
@@ -905,6 +908,10 @@ export default function WorkflowSteps() {
 
         </div>
 
+        {/* ============================================================== */}
+        {/* SECTION 3: SLIDES IN FROM THE LEFT OVER STATIC SECTION 2       */}
+        {/* ============================================================== */}
+        <CapabilitiesWorkflowSection scrollYProgress={scrollYProgress} />
 
       </div>
     </section>
