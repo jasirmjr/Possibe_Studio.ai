@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
 
 const TOTAL_FRAMES = 15;
 // Base frame duration in seconds (~12.2 fps => ~1.23s per full 15-frame two-step walk cycle)
@@ -8,15 +8,20 @@ const BASE_FRAME_DURATION = 0.082;
 /**
  * HumanoidMatrixSection
  * Section 3: High-Fidelity 15-Frame ASCII Walking Humanoid Engine
- * Single-screen fit (100vh), full black heading typography with scroll continuation,
+ * Single-screen fit (100vh), full black heading typography with scroll-reach kinetic animation,
  * project-related minimal texts on positions 2 & 4 directly in background (no cards),
  * zero orange line, zero bottom oval circle.
  */
-export default function HumanoidMatrixSection() {
+export default function HumanoidMatrixSection({ isEmbedded = false, isActive = false }) {
   const sectionRef = useRef(null);
   const canvasRef = useRef(null);
   const imagesRef = useRef([]);
   const [imagesLoaded, setImagesLoaded] = useState(false);
+
+  // When embedded, active state is driven by WorkflowSteps scrollProgress;
+  // when standalone, it uses useInView with amount: 0.25 (triggers each time).
+  const inView = useInView(sectionRef, { amount: 0.25 });
+  const effectiveActive = isEmbedded ? isActive : inView;
 
   // Live telemetry state for continuous subtle motion
   const [telemetry, setTelemetry] = useState({
@@ -150,42 +155,90 @@ export default function HumanoidMatrixSection() {
     };
   }, [imagesLoaded]);
 
-  return (
-    <section
-      ref={sectionRef}
-      id="capabilities"
-      className="relative h-screen min-h-[640px] max-h-screen pt-20 sm:pt-24 pb-4 bg-white text-zinc-900 overflow-hidden select-none flex flex-col justify-between items-center"
-    >
-      
+  const ContainerTag = isEmbedded ? 'div' : 'section';
+  const containerProps = isEmbedded
+    ? {
+        className:
+          'relative w-full h-full pt-20 sm:pt-24 pb-4 bg-white text-zinc-900 overflow-hidden select-none flex flex-col justify-between items-center',
+      }
+    : {
+        ref: sectionRef,
+        id: 'capabilities',
+        className:
+          'relative h-screen min-h-[640px] max-h-screen pt-20 sm:pt-24 pb-4 bg-white text-zinc-900 overflow-hidden select-none flex flex-col justify-between items-center',
+      };
 
+  return (
+    <ContainerTag {...containerProps}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full h-full flex flex-col justify-between items-center">
         
         {/* ============================================================== */}
         {/* TOP: SCROLL-CONTINUATION ANIMATED HEADING (FULL BLACK)         */}
         {/* ============================================================== */}
+        {/* ============================================================== */}
+        {/* TOP: SCROLL-REACH ANIMATED HEADING (FULL BLACK)                */}
+        {/* ============================================================== */}
         <motion.div
-          style={{
-            y: headingY,
-            opacity: headingOpacity,
-            scale: headingScale,
+          initial="hidden"
+          animate={effectiveActive ? 'visible' : 'hidden'}
+          variants={{
+            hidden: { opacity: 0, y: -36, scale: 0.95, filter: 'blur(8px)' },
+            visible: {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              filter: 'blur(0px)',
+              transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] },
+            },
           }}
           className="text-center max-w-2xl mx-auto pt-1 flex-shrink-0"
         >
-        
-
-          {/* Heading with continuous continuation from scroll - 100% FULL BLACK */}
-          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-light text-zinc-950 tracking-[-0.04em] leading-[1.1]">
-            <span>Humanoid Form.{' '}</span>
-            <span className="font-normal text-zinc-950">
+          {/* Heading with continuous scroll-reach reveal - 100% FULL BLACK */}
+          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-light text-zinc-950 tracking-[-0.04em] leading-[1.1] overflow-hidden">
+            <motion.span
+              variants={{
+                hidden: { opacity: 0, y: 32 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.75, delay: 0.05, ease: [0.16, 1, 0.3, 1] },
+                },
+              }}
+              className="inline-block mr-2.5 sm:mr-3.5"
+            >
+              Humanoid Form.
+            </motion.span>
+            <motion.span
+              variants={{
+                hidden: { opacity: 0, y: 32 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.75, delay: 0.16, ease: [0.16, 1, 0.3, 1] },
+                },
+              }}
+              className="inline-block font-normal text-zinc-950"
+            >
               Algorithmic Precision.
-            </span>
+            </motion.span>
           </h2>
 
-          {/* Subtitle */}
-          <p className="text-xs sm:text-sm font-light text-zinc-500 mt-2 max-w-lg mx-auto leading-relaxed">
+          {/* Subtitle with kinetic fade-up */}
+          <motion.p
+            variants={{
+              hidden: { opacity: 0, y: 16, filter: 'blur(4px)' },
+              visible: {
+                opacity: 1,
+                y: 0,
+                filter: 'blur(0px)',
+                transition: { duration: 0.8, delay: 0.24, ease: [0.16, 1, 0.3, 1] },
+              },
+            }}
+            className="text-xs sm:text-sm font-light text-zinc-500 mt-2 max-w-lg mx-auto leading-relaxed"
+          >
             Translating high-dimensional market intent into discrete biomechanical execution.
             Continuous real-time ASCII locomotion engine.
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* ============================================================== */}
@@ -201,14 +254,16 @@ export default function HumanoidMatrixSection() {
           <div className="w-64 hidden lg:flex flex-col justify-center gap-10 select-none">
             {/* Left Detail 1 */}
             <motion.div
-              initial={{ opacity: 0, x: -24, filter: 'blur(4px)' }}
-              whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-              viewport={{ once: false, amount: 0.3 }}
-              animate={{ y: [0, -6, 0] }}
-              transition={{
-                y: { repeat: Infinity, duration: 4.8, ease: 'easeInOut' },
-                duration: 0.7,
-                ease: [0.16, 1, 0.3, 1],
+              initial="hidden"
+              animate={effectiveActive ? 'visible' : 'hidden'}
+              variants={{
+                hidden: { opacity: 0, x: -55, filter: 'blur(6px)' },
+                visible: {
+                  opacity: 1,
+                  x: 0,
+                  filter: 'blur(0px)',
+                  transition: { duration: 0.75, delay: 0.25, ease: [0.16, 1, 0.3, 1] },
+                },
               }}
               className="space-y-1.5 text-left"
             >
@@ -217,15 +272,9 @@ export default function HumanoidMatrixSection() {
                 <span className="text-zinc-950 font-semibold tracking-wider">AUTONOMOUS MARKETING</span>
               </div>
               <motion.p
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false }}
-                animate={{ opacity: [0.75, 1, 0.75] }}
+                animate={{ opacity: effectiveActive ? [0.75, 1, 0.75] : 0 }}
                 transition={{
                   opacity: { repeat: Infinity, duration: 4.5, ease: 'easeInOut' },
-                  duration: 0.75,
-                  delay: 0.15,
-                  ease: 'easeOut',
                 }}
                 className="text-xs text-zinc-600 font-light leading-relaxed"
               >
@@ -235,15 +284,16 @@ export default function HumanoidMatrixSection() {
 
             {/* Left Detail 2 */}
             <motion.div
-              initial={{ opacity: 0, x: -24, filter: 'blur(4px)' }}
-              whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-              viewport={{ once: false, amount: 0.3 }}
-              animate={{ y: [0, 5, 0] }}
-              transition={{
-                y: { repeat: Infinity, duration: 5.4, ease: 'easeInOut', delay: 0.6 },
-                duration: 0.7,
-                delay: 0.2,
-                ease: [0.16, 1, 0.3, 1],
+              initial="hidden"
+              animate={effectiveActive ? 'visible' : 'hidden'}
+              variants={{
+                hidden: { opacity: 0, x: -55, filter: 'blur(6px)' },
+                visible: {
+                  opacity: 1,
+                  x: 0,
+                  filter: 'blur(0px)',
+                  transition: { duration: 0.75, delay: 0.40, ease: [0.16, 1, 0.3, 1] },
+                },
               }}
               className="space-y-1.5 text-left"
             >
@@ -252,15 +302,9 @@ export default function HumanoidMatrixSection() {
                 <span className="text-zinc-950 font-semibold tracking-wider">AUDIENCE INTELLIGENCE</span>
               </div>
               <motion.p
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false }}
-                animate={{ opacity: [0.75, 1, 0.75] }}
+                animate={{ opacity: effectiveActive ? [0.75, 1, 0.75] : 0 }}
                 transition={{
                   opacity: { repeat: Infinity, duration: 5.0, ease: 'easeInOut', delay: 0.5 },
-                  duration: 0.75,
-                  delay: 0.3,
-                  ease: 'easeOut',
                 }}
                 className="text-xs text-zinc-600 font-light leading-relaxed"
               >
@@ -272,13 +316,25 @@ export default function HumanoidMatrixSection() {
           {/* ------------------------------------------------------------ */}
           {/* CENTER: CLEAN ASCII WALKING CYBORG CANVAS                    */}
           {/* ------------------------------------------------------------ */}
-          <div className="relative flex-1 h-full max-w-xl min-h-0 flex items-center justify-center">
+          <motion.div
+            initial="hidden"
+            animate={effectiveActive ? 'visible' : 'hidden'}
+            variants={{
+              hidden: { opacity: 0, scale: 0.94 },
+              visible: {
+                opacity: 1,
+                scale: 1,
+                transition: { duration: 0.85, delay: 0.15, ease: [0.16, 1, 0.3, 1] },
+              },
+            }}
+            className="relative flex-1 h-full max-w-xl min-h-0 flex items-center justify-center"
+          >
             <canvas
               ref={canvasRef}
               className="w-full h-full block select-none bg-white"
               title="Biomechanical ASCII Locomotion Engine"
             />
-          </div>
+          </motion.div>
 
           {/* ------------------------------------------------------------ */}
           {/* RIGHT SIDE: 2 DETAILS (DIRECTLY ON BACKGROUND WITH ANIMATION)*/}
@@ -286,14 +342,16 @@ export default function HumanoidMatrixSection() {
           <div className="w-64 hidden lg:flex flex-col justify-center gap-10 select-none">
             {/* Right Detail 1 */}
             <motion.div
-              initial={{ opacity: 0, x: 24, filter: 'blur(4px)' }}
-              whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-              viewport={{ once: false, amount: 0.3 }}
-              animate={{ y: [0, -6, 0] }}
-              transition={{
-                y: { repeat: Infinity, duration: 5.0, ease: 'easeInOut', delay: 0.3 },
-                duration: 0.7,
-                ease: [0.16, 1, 0.3, 1],
+              initial="hidden"
+              animate={effectiveActive ? 'visible' : 'hidden'}
+              variants={{
+                hidden: { opacity: 0, x: 55, filter: 'blur(6px)' },
+                visible: {
+                  opacity: 1,
+                  x: 0,
+                  filter: 'blur(0px)',
+                  transition: { duration: 0.75, delay: 0.30, ease: [0.16, 1, 0.3, 1] },
+                },
               }}
               className="space-y-1.5 text-left"
             >
@@ -302,15 +360,9 @@ export default function HumanoidMatrixSection() {
                 <span className="text-zinc-950 font-semibold tracking-wider">7-STAGE PIPELINE</span>
               </div>
               <motion.p
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false }}
-                animate={{ opacity: [0.75, 1, 0.75] }}
+                animate={{ opacity: effectiveActive ? [0.75, 1, 0.75] : 0 }}
                 transition={{
                   opacity: { repeat: Infinity, duration: 4.8, ease: 'easeInOut', delay: 0.3 },
-                  duration: 0.75,
-                  delay: 0.15,
-                  ease: 'easeOut',
                 }}
                 className="text-xs text-zinc-600 font-light leading-relaxed"
               >
@@ -320,15 +372,16 @@ export default function HumanoidMatrixSection() {
 
             {/* Right Detail 2 */}
             <motion.div
-              initial={{ opacity: 0, x: 24, filter: 'blur(4px)' }}
-              whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-              viewport={{ once: false, amount: 0.3 }}
-              animate={{ y: [0, 5, 0] }}
-              transition={{
-                y: { repeat: Infinity, duration: 5.6, ease: 'easeInOut', delay: 0.9 },
-                duration: 0.7,
-                delay: 0.2,
-                ease: [0.16, 1, 0.3, 1],
+              initial="hidden"
+              animate={effectiveActive ? 'visible' : 'hidden'}
+              variants={{
+                hidden: { opacity: 0, x: 55, filter: 'blur(6px)' },
+                visible: {
+                  opacity: 1,
+                  x: 0,
+                  filter: 'blur(0px)',
+                  transition: { duration: 0.75, delay: 0.45, ease: [0.16, 1, 0.3, 1] },
+                },
               }}
               className="space-y-1.5 text-left"
             >
@@ -337,15 +390,9 @@ export default function HumanoidMatrixSection() {
                 <span className="text-zinc-950 font-semibold tracking-wider">REAL-TIME OPTIMIZATION</span>
               </div>
               <motion.p
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false }}
-                animate={{ opacity: [0.75, 1, 0.75] }}
+                animate={{ opacity: effectiveActive ? [0.75, 1, 0.75] : 0 }}
                 transition={{
                   opacity: { repeat: Infinity, duration: 5.2, ease: 'easeInOut', delay: 0.8 },
-                  duration: 0.75,
-                  delay: 0.3,
-                  ease: 'easeOut',
                 }}
                 className="text-xs text-zinc-600 font-light leading-relaxed"
               >
@@ -359,6 +406,6 @@ export default function HumanoidMatrixSection() {
        
 
       </div>
-    </section>
+    </ContainerTag>
   );
 }

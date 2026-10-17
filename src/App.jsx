@@ -3,7 +3,6 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import HeroSection from './components/hero/HeroSection';
 import WorkflowSteps from './components/sections/WorkflowSteps';
-import HumanoidMatrixSection from './components/sections/HumanoidMatrixSection';
 import StageDeepDiveSection from './components/sections/StageDeepDiveSection';
 import ContactSection from './components/sections/ContactSection';
 
@@ -22,11 +21,8 @@ export default function App() {
         {/* 1. Hero Section: Cinematic reveal with close-up agent graphic */}
         <HeroSection />
 
-        {/* 2. 7-Stage Workflow Steps */}
+        {/* 2. 7-Stage Workflow Steps (With Section 3 sliding in from left over static Stage 07) */}
         <WorkflowSteps />
-
-        {/* 3. Kinetic Typographic Humanoid Robot Matrix Animation */}
-        <HumanoidMatrixSection />
 
         {/* 4. Stage-by-Stage Scroll Pinned Narrative (Alternating Agent View) */}
         <StageDeepDiveSection />

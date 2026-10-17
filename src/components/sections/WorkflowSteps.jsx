@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
+import HumanoidMatrixSection from './HumanoidMatrixSection';
+import AsciiVideoGraphic from './AsciiVideoGraphic';
 
 // ============================================================================
 // 7 HIGH-DEFINITION VECTOR ILLUSTRATIONS (CLEAR & RECOGNIZABLE)
@@ -665,26 +667,10 @@ function VectorHandshake() {
   );
 }
 
-// Dynamic illustration selector
+// Dynamic ASCII Video Animation selector (Level 1 to 7)
 function StageGraphic({ stageNumber }) {
-  switch (stageNumber) {
-    case '01':
-      return <VectorKeyboard />;
-    case '02':
-      return <VectorImageGen />;
-    case '03':
-      return <VectorInstagram />;
-    case '04':
-      return <VectorAudience />;
-    case '05':
-      return <VectorCash />;
-    case '06':
-      return <VectorChats />;
-    case '07':
-      return <VectorHandshake />;
-    default:
-      return <VectorKeyboard />;
-  }
+  const lvl = parseInt(stageNumber, 10) || 1;
+  return <AsciiVideoGraphic level={lvl} />;
 }
 
 // 7 Stages updated with user's specific workflow actions
@@ -737,7 +723,8 @@ export default function WorkflowSteps() {
   const containerRef = useRef(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  // Scroll tracking: 420vh total height ensures 6 deliberate scroll intervals
+  // Scroll tracking: 520vh total height ensures 6 deliberate stage wipe transitions,
+  // followed by a static hold on Stage 7, then Section 3 sliding in from the left over Section 2!
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
@@ -747,14 +734,14 @@ export default function WorkflowSteps() {
     setScrollProgress(latest);
   });
 
-  // Allocate 95% of the scroll track to the 6 level wipe transitions, holding on Stage 07.
-  const TRANSITION_FRACTION = 0.95;
-  const transitionProgress = Math.min(1, scrollProgress / TRANSITION_FRACTION);
-  const isFinalStatic = transitionProgress >= 1;
+  // Stages 1-7 transitions take 0.0 to 0.65 of scroll, holding on Stage 7 from 0.65 onwards
+  const STAGES_FRACTION = 0.65;
+  const stagesProgress = Math.min(1, scrollProgress / STAGES_FRACTION);
+  const isFinalStatic = stagesProgress >= 1;
 
   const totalStages = STAGES.length; // 7
   const numSegments = totalStages - 1; // 6
-  const rawProgress = transitionProgress * numSegments;
+  const rawProgress = stagesProgress * numSegments;
   const currentIdx = isFinalStatic
     ? totalStages - 1
     : Math.min(totalStages - 2, Math.floor(rawProgress));
@@ -766,14 +753,32 @@ export default function WorkflowSteps() {
   // The cross line travels from bottom (100%) to top (0%)
   const lineY = isFinalStatic ? 0 : (1 - segmentT) * 100;
 
+  // Section 3 slides in from the left over static Section 2 from progress 0.68 to 0.86
+  const section3X = useTransform(
+    scrollYProgress,
+    [0.68, 0.86],
+    ['-100%', '0%'],
+    { clamp: true }
+  );
+
+  const section3Opacity = useTransform(
+    scrollYProgress,
+    [0.66, 0.68],
+    [0, 1],
+    { clamp: true }
+  );
+
   const currentStage = STAGES[currentIdx] || STAGES[0];
   const nextStage = STAGES[nextIdx] || STAGES[totalStages - 1];
+
+  // Section 3 is active whenever scroll reaches the transition threshold (>= 0.74)
+  const isSection3Active = scrollProgress >= 0.74;
 
   const handleStageClick = (idx) => {
     if (!containerRef.current) return;
     const totalHeight = containerRef.current.scrollHeight - window.innerHeight;
     const containerTop = containerRef.current.offsetTop;
-    const targetScroll = containerTop + (idx / numSegments) * (totalHeight * TRANSITION_FRACTION);
+    const targetScroll = containerTop + (idx / numSegments) * (totalHeight * STAGES_FRACTION);
     window.scrollTo({ top: targetScroll, behavior: 'smooth' });
   };
 
@@ -782,8 +787,14 @@ export default function WorkflowSteps() {
       ref={containerRef}
       id="workflow"
       className="relative z-10 bg-white text-zinc-900 select-none"
-      style={{ height: '380vh' }}
+      style={{ height: '520vh' }}
     >
+      {/* Anchor marker for navbar #capabilities link */}
+      <div
+        id="capabilities"
+        className="absolute pointer-events-none"
+        style={{ top: '380vh', height: '1px' }}
+      />
       {/* ============================================================== */}
       {/* PINNED VIEWPORT: Stays sticky across the 6 transition intervals */}
       {/* ============================================================== */}
@@ -902,6 +913,20 @@ export default function WorkflowSteps() {
             <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-orange-500 to-transparent shadow-[0_0_12px_#ff6b00]" />
           </div>
         </div>
+
+        {/* ============================================================== */}
+        {/* LAYER 3: SECTION 3 SLIDING IN FROM LEFT OVER STATIC SECTION 2  */}
+        {/* Section 2 stays static while Section 3 slides in from left     */}
+        {/* ============================================================== */}
+        <motion.div
+          style={{
+            x: section3X,
+            opacity: section3Opacity,
+          }}
+          className="absolute inset-0 z-40 w-full h-full bg-white shadow-[25px_0_60px_rgba(0,0,0,0.12)] overflow-hidden"
+        >
+          <HumanoidMatrixSection isEmbedded={true} isActive={isSection3Active} />
+        </motion.div>
       </div>
     </section>
   );
