@@ -18,6 +18,7 @@ export default function Header() {
   const navLinks = [
     { name: 'Workflow', href: '#workflow' },
     { name: 'Capabilities', href: '#capabilities' },
+    { name: "Rubik's 3D", href: '#rubiks' },
     { name: 'Stages', href: '#stages-deep-dive' },
     { name: 'Contact', href: '#contact' },
   ];

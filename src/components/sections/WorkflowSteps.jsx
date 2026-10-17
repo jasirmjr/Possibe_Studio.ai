@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion';
 import HumanoidMatrixSection from './HumanoidMatrixSection';
 import AsciiVideoGraphic from './AsciiVideoGraphic';
 
@@ -753,26 +753,72 @@ export default function WorkflowSteps() {
   // The cross line travels from bottom (100%) to top (0%)
   const lineY = isFinalStatic ? 0 : (1 - segmentT) * 100;
 
-  // Section 3 slides in from the left over static Section 2 from progress 0.68 to 0.86
+  // Section 3 slides in from the left over static Section 2 from progress 0.66 to 0.80
   const section3X = useTransform(
     scrollYProgress,
-    [0.68, 0.86],
+    [0.66, 0.80],
     ['-100%', '0%'],
     { clamp: true }
   );
 
   const section3Opacity = useTransform(
     scrollYProgress,
-    [0.66, 0.68],
+    [0.64, 0.66],
     [0, 1],
     { clamp: true }
   );
 
+  // Section 3 destruction & right corner dump (from 0.86 to 0.98)
+  const destroyProgressRaw = useTransform(
+    scrollYProgress,
+    [0.86, 0.98],
+    [0, 1],
+    { clamp: true }
+  );
+
+  // Snappy, instant spring response with zero lag
+  const smoothDestroyProgress = useSpring(destroyProgressRaw, {
+    stiffness: 300,
+    damping: 32,
+    mass: 0.5,
+    restDelta: 0.001,
+  });
+
+  // Small rotation (4.8deg) that activates AFTER elements have fallen and dumped (progress 0.48 -> 1.00)
+  // Rotating around 'bottom right' naturally lifts the bottom-left corner up by ~115px!
+  const section3Rotate = useTransform(
+    smoothDestroyProgress,
+    [0.0, 0.48, 1.0],
+    [0, 0, 4.8],
+    { clamp: true }
+  );
+
+  const section3Scale = useTransform(
+    smoothDestroyProgress,
+    [0.0, 0.48, 1.0],
+    [1, 1, 1.03],
+    { clamp: true }
+  );
+
+  // Fade out underlying Stage 7 when Section 3 slides in
+  const underlyingStageOpacity = useTransform(
+    scrollYProgress,
+    [0.68, 0.78],
+    [1, 0],
+    { clamp: true }
+  );
+
+  const [destroyProgressVal, setDestroyProgressVal] = useState(0);
+
+  useMotionValueEvent(smoothDestroyProgress, 'change', (latest) => {
+    setDestroyProgressVal(latest);
+  });
+
   const currentStage = STAGES[currentIdx] || STAGES[0];
   const nextStage = STAGES[nextIdx] || STAGES[totalStages - 1];
 
-  // Section 3 is active whenever scroll reaches the transition threshold (>= 0.74)
-  const isSection3Active = scrollProgress >= 0.74;
+  // Section 3 is active whenever scroll reaches the transition threshold (>= 0.72)
+  const isSection3Active = scrollProgress >= 0.72;
 
   const handleStageClick = (idx) => {
     if (!containerRef.current) return;
@@ -787,13 +833,13 @@ export default function WorkflowSteps() {
       ref={containerRef}
       id="workflow"
       className="relative z-10 bg-white text-zinc-900 select-none"
-      style={{ height: '520vh' }}
+      style={{ height: '560vh' }}
     >
       {/* Anchor marker for navbar #capabilities link */}
       <div
         id="capabilities"
         className="absolute pointer-events-none"
-        style={{ top: '380vh', height: '1px' }}
+        style={{ top: '400vh', height: '1px' }}
       />
       {/* ============================================================== */}
       {/* PINNED VIEWPORT: Stays sticky across the 6 transition intervals */}
@@ -810,7 +856,7 @@ export default function WorkflowSteps() {
         {/* Layer 2 (Next stage) clipped from 0% down to lineY             */}
         {/* Open cells grid: No closed border, soft radial blend!          */}
         {/* ============================================================== */}
-        <div className="relative w-full h-full flex-1">
+        <motion.div style={{ opacity: underlyingStageOpacity }} className="relative w-full h-full flex-1">
           
           {/* ------------------------------------------------------------ */}
           {/* LAYER 1: CURRENT STAGE (Visible above the moving cross line) */}
@@ -912,7 +958,7 @@ export default function WorkflowSteps() {
             {/* The horizontal cross line with orange neon glow */}
             <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-orange-500 to-transparent shadow-[0_0_12px_#ff6b00]" />
           </div>
-        </div>
+        </motion.div>
 
         {/* ============================================================== */}
         {/* LAYER 3: SECTION 3 SLIDING IN FROM LEFT OVER STATIC SECTION 2  */}
@@ -922,10 +968,17 @@ export default function WorkflowSteps() {
           style={{
             x: section3X,
             opacity: section3Opacity,
+            rotate: section3Rotate,
+            scale: section3Scale,
+            transformOrigin: 'bottom right',
           }}
           className="absolute inset-0 z-40 w-full h-full bg-white shadow-[25px_0_60px_rgba(0,0,0,0.12)] overflow-hidden"
         >
-          <HumanoidMatrixSection isEmbedded={true} isActive={isSection3Active} />
+          <HumanoidMatrixSection
+            isEmbedded={true}
+            isActive={isSection3Active}
+            destroyProgress={destroyProgressVal}
+          />
         </motion.div>
       </div>
     </section>

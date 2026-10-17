@@ -3,6 +3,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import HeroSection from './components/hero/HeroSection';
 import WorkflowSteps from './components/sections/WorkflowSteps';
+import RubiksCubeSection from './components/rubiks/RubiksCubeSection';
 import StageDeepDiveSection from './components/sections/StageDeepDiveSection';
 import ContactSection from './components/sections/ContactSection';
 
@@ -23,6 +24,9 @@ export default function App() {
 
         {/* 2. 7-Stage Workflow Steps (With Section 3 sliding in from left over static Stage 07) */}
         <WorkflowSteps />
+
+        {/* 3. 3D WebGL Physically Grounded Rubik's Cube Section (#DCE3A5 Pale Sage) */}
+        <RubiksCubeSection />
 
         {/* 4. Stage-by-Stage Scroll Pinned Narrative (Alternating Agent View) */}
         <StageDeepDiveSection />
